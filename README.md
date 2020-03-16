@@ -1,1 +1,1 @@
-This is the project for CS546B 2020Fall.
+This is the project for CS546B 2020 Spring.
