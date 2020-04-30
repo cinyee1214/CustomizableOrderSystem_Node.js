@@ -99,3 +99,18 @@ body {
     /* background-color: #D1C4E9; */
     background-color: #D1C4E9;
 }
+
+#signupModal .modal-header {
+    /* background-color: #512DA8; */
+    background-color: #512DA8;
+    color: white;
+}
+
+#signupModal .modal-header button {
+    color: white;
+}
+
+#signupModal .modal-body {
+    /* background-color: #D1C4E9; */
+    background-color: #D1C4E9;
+}
