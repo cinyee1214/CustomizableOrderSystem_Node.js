@@ -1,14 +1,18 @@
 {
-    "name": "CS546_Final_Project",
+    "name": "project",
     "version": "1.0.0",
     "description": "",
     "main": "app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "npm run app"
+        "start": "npm run lite",
+        "lite": "lite-server"
     },
     "author": "Xinyi Zhao",
     "license": "ISC",
+    "devDependencies": {
+        "lite-server": "^2.3.0"
+    },
     "dependencies": {
         "bootstrap": "^4.0.0",
         "bootstrap-social": "^5.1.1",
