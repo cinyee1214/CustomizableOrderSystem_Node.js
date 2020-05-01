@@ -52,33 +52,41 @@
         <div class="row">
             <ol class="col-12 breadcrumb">
                 <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
-                <li class="breadcrumb-item active">Contact Us</li>
+                <li class="breadcrumb-item active">Menu</li>
             </ol>
             <div class="col-12">
-                <h3>Contact Us</h3>
+                <h3>Menu</h3>
                 <hr>
             </div>
         </div>
 
         <div class="row row-content">
             <div class="col-12">
-                <h3>Location Information</h3>
+                <h3>Hot Pot</h3>
             </div>
             <div class="col-12 col-sm-4 offset-sm-1">
-                <h5>Our Address</h5>
-                <address style="font-size: 100%">
-                    121, Clear Water Bay Road<br>
-                    Hoboken, New Jersey<br>
-                    USA<br>
-		              <i class="fa fa-phone"></i>: +1521 234 5678<br>
-		              <i class="fa fa-fax"></i>: +1528 765 4321<br>
-		              <i class="fa fa-envelope"></i>:
-                        <a href="mailto:confusion@food.net">unicorn@food.net</a>
-		           </address>
+                <h5>Buffet: $21.99/Person</h5>
+                <img class="d-block img-fluid" src="img/uthappizza.png" alt="uthappizza">
+                <p class="d-none d-sm-block">A unique buffet of Chinese Hot Pot, prepared with a simmering pot of soup stock at the dining table, containing a variety of East Asian foodstuffs and ingredients.</p>
             </div>
-            <div class="col-12 col-sm-6 offset-sm-1">
-                <h5>Map of our Location</h5>
-                <img class="d-block img-fluid" src="img/map.png" alt="map">
+            <div class="col-12 col-sm-6">
+                <div class="card">
+                    <h3 class="card-header bg-dark text-white">Ingredients At a Glance</h3>
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-6">Soup Base</dt>
+                            <dd class="col-6">Spicy / Mild</dd>
+                            <dt class="col-6">Meat</dt>
+                            <dd class="col-6">Beef, Lamb, Pork, Seafood</dd>
+                            <dt class="col-6">Vegetable</dt>
+                            <dd class="col-6">Mushrooms, Lettuce, Spinach</dd>
+                            <dt class="col-6">Others</dt>
+                            <dd class="col-6">Noodles and Dumplings</dd>
+                            <dt class="col-6">Others</dt>
+                            <dd class="col-6">Tofu and Soy bean products</dd>
+                        </dl>
+                    </div>
+                </div>
             </div>
             <div class="col-12 col-sm-11 offset-sm-1">
                 <div class="btn-group" role="group">
@@ -91,63 +99,75 @@
 
         <div class="row row-content">
             <div class="col-12">
-                <h3>Send us your Feedback</h3>
+                <h3>Customize Your Dish</h3>
             </div>
             <div class="col-12 col-md-9">
                 <form>
-                    <div class="form-group row">
-                        <label for="firstname" class="col-md-2 col-form-label">First Name</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="lastname" class="col-md-2 col-form-label">Last Name</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="telnum" class="col-12 col-md-2 col-form-label">Contact Tel.</label>
-                        <div class="col-5 col-md-3">
-                            <input type="tel" class="form-control" id="areacode" name="areacode" placeholder="Area code">
-                        </div>
-                        <div class="col-7 col-md-7">
-                            <input type="tel" class="form-control" id="telnum" name="telnum" placeholder="Tel. number">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="emailid" class="col-md-2 col-form-label">Email</label>
-                        <div class="col-md-10">
-                            <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-md-6 offset-md-2">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" name="approve" id="approve" value="">
-                                <label class="form-check-label" for="approve">
-                                    <strong>May we contact you?</strong>
-                                </label>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" role="tablist" id="peterhead">
+                                <h3 class="mb-0">
+                                    <a data-toggle="collapse" data-target="#peter">
+                                Peter Pan <small>Chief Epicurious Officer</small>
+                                </a>
+                                </h3>
+                            </div>
+                            <div class="collapse show" id="peter" data-parent="#accordion">
+                                <div class="card-body">
+                                    <p class="d-none d-sm-block">Our CEO, Peter, credits his hardworking East Asian immigrant parents who undertook the arduous journey to the shores of America with the intention of giving their children the best future. His mother's wizardy in the
+                                        kitchen whipping up the tastiest dishes with whatever is available inexpensively at the supermarket, was his first inspiration to create the fusion cuisines for which <em>The Frying Pan</em> became well known. He
+                                        brings his zeal for fusion cuisines to this restaurant, pioneering cross-cultural culinary connections.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3 offset-md-1">
-                            <select class="form-control">
-                                <option>Tel.</option>
-                                <option>Email</option>
-                            </select>
+
+                        <div class="card">
+                            <div class="card-header" role="tablist" id="dannyhead">
+                                <h3 class="mb-0">
+                                    <a data-toggle="collapse" data-target="#danny">
+                                    Dhanasekaran Witherspoon <small>Chief Food Officer</small>
+                                </a>
+                                </h3>
+                            </div>
+                            <div class="collapse" id="danny" data-parent="#accordion">
+                                <div class="card-body">
+                                    <p class="d-none d-sm-block">Our CFO, Danny, as he is affectionately referred to by his colleagues, comes from a long established family tradition in farming and produce. His experiences growing up on a farm in the Australian outback gave him great
+                                        appreciation for varieties of food sources. As he puts it in his own words, <em>Everything that runs, wins, and everything that stays, pays!</em></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="feedback" class="col-md-2 col-form-label">Your Feedback</label>
-                        <div class="col-md-10">
-                            <textarea class="form-control" id="feedback" name="feedback" rows="12"></textarea>
+
+                        <div class="card">
+                            <div class="card-header" role="tablist" id="agumbehead">
+                                <h3 class="mb-0">
+                                    <a data-toggle="collapse" data-target="#agumbe">
+                                    Agumbe Tang <small>Chief Taste Officer</small>
+                                </a>
+                                </h3>
+                            </div>
+                            <div class="collapse" id="agumbe" data-parent="#accordion">
+                                <div class="card-body">
+                                    <p class="d-none d-sm-block">Blessed with the most discerning gustatory sense, Agumbe, our CTO, personally ensures that every dish that we serve meets his exacting tastes. Our chefs dread the tongue lashing that ensues if their dish does not meet
+                                        his exacting standards. He lives by his motto, <em>You click only if you survive my lick.</em></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="offset-md-2 col-md-10">
-                            <button type="submit" class="btn btn-primary">Send Feedback</button>
+
+                        <div class="card">
+                            <div class="card-header" role="tablist" id="albertohead">
+                                <h3 class="mb-0">
+                                    <a data-toggle="collapse" data-target="#alberto">
+                                        Simon Lee <small>Executive Chef</small>
+                                </a>
+                                </h3>
+                            </div>
+                            <div class="collapse" id="alberto" data-parent="#accordion">
+                                <div class="card-body">
+                                    <p class="d-none d-sm-block">Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering fusion experiences. He says, <em>Put together the cuisines from the two craziest cultures, and you get a winning hit! Amma Mia!</em></p>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </form>
             </div>
