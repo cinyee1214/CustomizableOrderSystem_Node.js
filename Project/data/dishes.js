@@ -5,8 +5,8 @@ const { ObjectId } = require('mongodb');
 
 
 module.exports = {
-    
-    async addDish(vegetable, meat, cookingStyle, flavor, carbohydrate, drink, product){
+
+    async addDish(vegetable, meat, cookingStyle, flavor, carbohydrate, drink, product) {
         if (arguments.length < 7) throw "arguments are not enough";
         if (!vegetable) throw "You must provide a vegetable";
         if (vegetable === undefined) throw "vegetable not defined";
@@ -29,7 +29,7 @@ module.exports = {
         if (!product) throw "You must provide product";
         if (product === undefined) throw "product not defined";
         if (typeof product !== "string") throw "product value is not a string";
-        
+
 
         const dishCollection = await dishes();
 
@@ -43,7 +43,7 @@ module.exports = {
             product: product
         };
 
-        
+
         const insertInfo = await dishCollection.insertOne(newDish);
         if (insertInfo.insertedCount === 0) throw "Could not add dish";
         const newId = insertInfo.insertedId;
@@ -52,54 +52,54 @@ module.exports = {
     },
 
 
-    async getAllDish(){
+    async getAllDish() {
         const dishCollection = await dishes();
         const allDishes = await dishCollection.find({}).toArray();
         return allDishes;
     },
-    
 
-    async getDish(id){
+
+    async getDish(id) {
         if (!id) throw "You must provide an id to search for";
-        if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
-        if (typeof(id) !== "object"){
-            id=ObjectId.createFromHexString(id);
+        if (typeof(id) != "string" && typeof(id) != "object") throw "id type must be string or object";
+        if (typeof(id) !== Object) {
+            id = ObjectId.createFromHexString(id);
         }
 
         const dishCollection = await dishes();
-        const dishgo = await dishCollection.findOne({_id: id });
+        const dishgo = await dishCollection.findOne({ _id: id });
         if (dishgo === null) throw "No dish with that id";
         return dishgo;
     },
 
-    async removeDish(id){
+    async removeDish(id) {
         if (!id) throw "You must provide an id to search for";
-        if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
-        if (typeof(id) !== "object"){
-            id=ObjectId.createFromHexString(id);
+        if (typeof(id) != "string" && typeof(id) != "object") throw "id type must be string or object";
+        if (typeof(id) !== Object) {
+            id = ObjectId.createFromHexString(id);
         }
 
         const dishCollection = await dishes();
         const dish = await this.getDish(id);
         const deletionInfo = await dishCollection.removeOne({ _id: id });
 
-        if (deletionInfo.deletedCount === 0){
+        if (deletionInfo.deletedCount === 0) {
             throw `Could not delete dish with id of ${id},it does not exist`;
         }
 
         return dish;
-        
+
     },
 
-    async updateDish(id, vegetable, meat, cookingStyle, flavor, carbohydrate, drink, product){
+    async updateDish(id, vegetable, meat, cookingStyle, flavor, carbohydrate, drink, product) {
         if (arguments.length < 8) throw "arguments are not enough";
         if (!id) throw "You must provide an id to search for";
-        if (id===undefined) throw "id not defined";
-        if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
-        if (typeof(id) !== "object"){
-            id=ObjectId.createFromHexString(id);
+        if (id === undefined) throw "id not defined";
+        if (typeof(id) != "string" && typeof(id) != "object") throw "id type must be string or object";
+        if (typeof(id) !== Object) {
+            id = ObjectId.createFromHexString(id);
         }
-        
+
         if (!vegetable) throw "You must provide a vegetable";
         if (vegetable === undefined) throw "vegetable not defined";
         if (typeof vegetable !== "string") throw "vegetable value is not a string";
@@ -124,7 +124,7 @@ module.exports = {
 
 
         const dishCollection = await dishes();
-        
+
         const updatedDish = {
             vegetable: vegetable,
             meat: meat,
@@ -135,8 +135,8 @@ module.exports = {
             product: product
         };
 
-        const updatedInfo = await dishCollection.updateOne({ _id: id }, {$set: updatedDish});
-        if (updatedInfo.modifiedCount === 0){
+        const updatedInfo = await dishCollection.updateOne({ _id: id }, { $set: updatedDish });
+        if (updatedInfo.modifiedCount === 0) {
             throw "could not update the dish successfully";
         }
 
