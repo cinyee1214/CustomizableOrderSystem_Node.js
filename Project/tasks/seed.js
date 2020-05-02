@@ -6,7 +6,7 @@ const finishedDishes = data.finishedDishes;
 const comments = data.comments;
 
 async function main() {
-    console.log("Connected to the database.");
+    console.log("Connected to the database");
 	const db = await dbConnection();
 	await db.dropDatabase();
 
