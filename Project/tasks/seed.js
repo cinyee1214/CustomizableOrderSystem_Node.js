@@ -54,7 +54,7 @@ async function main() {
     }
 
     //a new finished dish
-    const finishedDish1 = await finishedDishes.addFinishedDish(
+    const FinishedDish1 = await finishedDishes.addFinishedDish(
         Dish[1]._id, 
         User1._id, 
         Dish[1].prodcut, 
@@ -64,9 +64,9 @@ async function main() {
     );
 
     //a new comment
-    const comment1 = await comments.addComment(
+    const Comment1 = await comments.addComment(
         User1._id, 
-        finishedDish1._id, 
+        FinishedDish1._id, 
         "Very dilicious"
     );
 
