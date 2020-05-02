@@ -57,7 +57,7 @@ async function main() {
     const FinishedDish1 = await finishedDishes.addFinishedDish(
         Dish[1]._id, 
         User1._id, 
-        Dish[1].prodcut, 
+        Dish[1].product, 
         Dish[1].carbohydrate, 
         Dish[1].drink,
         ["good"]
