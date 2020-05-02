@@ -21,17 +21,17 @@ async function main() {
 
 
     //dish materials selection
-    let vegetable = ['Tomatao', 'Potato'];
-    let meat = ['Beef', 'Chicken'];
+    let vegetable = ['Tomatao', 'Potato', 'Mushroom', 'Eggplant'];
+    let meat = ['Beef', 'Pork', 'Chicken'];
     let cookingstyle = ['Stew', 'Fry'];
-    let flavor = ['Mild', 'Spicy'];
-    let carbohydrate = ['Rice', 'Noodle'];
-    let drink = ['Milk', 'Cola'];
+    let flavor = ['Spicy', 'Mild'];
+    let carbohydrate = ['Rice', 'Noodles'];
+    let drink = ['Soda', 'Milk'];
     //A total of 64 combinations
-    let Dish = new Array(64);
+    let Dish = new Array(192);
     let index = 0;
-    for (let a = 0; a < 2; a++) {
-        for (let b = 0; b < 2; b++) {
+    for (let a = 0; a < 4; a++) {
+        for (let b = 0; b < 3; b++) {
             for (let c = 0; c < 2; c++) {
                 for (let d = 0; d < 2; d++) {
                     for (let e = 0; e < 2; e++) {
