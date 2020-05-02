@@ -43,7 +43,7 @@ async function main() {
                                 flavor[d],
                                 carbohydrate[e],
                                 drink[f], 
-                                `${cookingstyle[c]}ed ${meat[b]} ${flavor[d]} with ${vegetable[a]}`
+                                `${cookingstyle[c]}ed ${flavor[d]} ${meat[b]} with ${vegetable[a]}`
                                 );
                             index++;
                         }
