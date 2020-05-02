@@ -6,7 +6,7 @@ const finishedDishes = data.finishedDishes;
 const comments = data.comments;
 
 async function main() {
-    console.log("Connected to the database.");
+    console.log("Connected to the database");
     const db = await dbConnection();
     await db.dropDatabase();
 
@@ -43,7 +43,7 @@ async function main() {
                                 flavor[d],
                                 carbohydrate[e],
                                 drink[f],
-                                `${cookingstyle[c]}ed ${meat[b]} ${flavor[d]} with ${vegetable[a]}`
+                                `${cookingstyle[c]}ed ${flavor[d]} ${meat[b]} with ${vegetable[a]}`
                             );
                             index++;
                         }

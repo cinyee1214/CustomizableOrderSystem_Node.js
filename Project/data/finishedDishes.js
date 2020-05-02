@@ -10,14 +10,14 @@ module.exports = {
         if (arguments.length < 6) throw "arguments are not enough";
         if (!dish_id) throw "You must provide a dish_id to search for";
         if (dish_id === undefined) throw "dish_id not defined";
-        if (typeof(dish_id) != "string" && typeof(dish_id) != "object") throw "dish_id type must be string or object";
-        if (typeof(dish_id) !== Object) {
+        if (typeof(dish_id) !== "string" && typeof(dish_id) !== "object") throw "dish_id type must be string or object";
+        if (typeof(dish_id) !== "object") {
             dish_id = ObjectId.createFromHexString(dish_id);
         }
         if (!user_id) throw "You must provide a user_id to search for";
         if (user_id === undefined) throw "user_id not defined";
-        if (typeof(user_id) != "string" && typeof(user_id) != "object") throw "user_id type must be string or object";
-        if (typeof(user_id) !== Object) {
+        if (typeof(user_id) !== "string" && typeof(user_id) !== "object") throw "user_id type must be string or object";
+        if (typeof(user_id) !== "object") {
             user_id = ObjectId.createFromHexString(user_id);
         }
 
@@ -63,8 +63,8 @@ module.exports = {
 
     async getFinishedDish(id) {
         if (!id) throw "You must provide an id to search for";
-        if (typeof(id) != "string" && typeof(id) != "object") throw "id type must be string or object";
-        if (typeof(id) !== Object) {
+        if (typeof(user_id) !== "string" && typeof(user_id) !== "object") throw "user_id type must be string or object";
+        if (typeof(user_id) !== "object") {
             id = ObjectId.createFromHexString(id);
         }
 
@@ -77,7 +77,7 @@ module.exports = {
     async removeFinishedDish(id) {
         if (!id) throw "You must provide an id to search for";
         if (typeof(id) != "string" && typeof(id) != "object") throw "id type must be string or object";
-        if (typeof(id) !== Object) {
+        if (typeof(id) !== "object") {
             id = ObjectId.createFromHexString(id);
         }
 
@@ -97,20 +97,20 @@ module.exports = {
         if (arguments.length < 7) throw "arguments are not enough";
         if (!id) throw "You must provide an id to search for";
         if (id === undefined) throw "id not defined";
-        if (typeof(id) != "string" && typeof(id) != "object") throw "id type must be string or object";
-        if (typeof(id) !== Object) {
+        if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
+        if (typeof(id) !== "object") {
             id = ObjectId.createFromHexString(id);
         }
         if (!dish_id) throw "You must provide a dish_id to search for";
         if (dish_id === undefined) throw "dish_id not defined";
-        if (typeof(dish_id) != "string" && typeof(dish_id) != "object") throw "dish_id type must be string or object";
-        if (typeof(dish_id) !== Object) {
+        if (typeof(dish_id) !== "string" && typeof(dish_id) !== "object") throw "dish_id type must be string or object";
+        if (typeof(dish_id) !== "object") {
             dish_id = ObjectId.createFromHexString(dish_id);
         }
         if (!user_id) throw "You must provide a user_id to search for";
         if (user_id === undefined) throw "user_id not defined";
-        if (typeof(user_id) != "string" && typeof(user_id) != "object") throw "user_id type must be string or object";
-        if (typeof(user_id) !== Object) {
+        if (typeof(user_id) !== "string" && typeof(user_id) !== "object") throw "user_id type must be string or object";
+        if (typeof(user_id) !== "object") {
             user_id = ObjectId.createFromHexString(user_id);
         }
 
