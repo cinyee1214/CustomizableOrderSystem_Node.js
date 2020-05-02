@@ -61,8 +61,8 @@ module.exports = {
 
     async getDish(id){
         if (!id) throw "You must provide an id to search for";
-        if (typeof(id) != "string" && typeof(id) != "object") throw "id type must be string or object";
-        if (typeof(id) !== Object){
+        if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
+        if (typeof(id) !== "object"){
             id=ObjectId.createFromHexString(id);
         }
 
@@ -74,8 +74,8 @@ module.exports = {
 
     async removeDish(id){
         if (!id) throw "You must provide an id to search for";
-        if (typeof(id) != "string" && typeof(id) != "object") throw "id type must be string or object";
-        if (typeof(id) !== Object){
+        if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
+        if (typeof(id) !== "object"){
             id=ObjectId.createFromHexString(id);
         }
 
@@ -95,8 +95,8 @@ module.exports = {
         if (arguments.length < 8) throw "arguments are not enough";
         if (!id) throw "You must provide an id to search for";
         if (id===undefined) throw "id not defined";
-        if (typeof(id) != "string" && typeof(id) != "object") throw "id type must be string or object";
-        if (typeof(id) !== Object){
+        if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
+        if (typeof(id) !== "object"){
             id=ObjectId.createFromHexString(id);
         }
         
