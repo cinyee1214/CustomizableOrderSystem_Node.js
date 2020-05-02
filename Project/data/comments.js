@@ -10,7 +10,7 @@ module.exports = {
         if (arguments.length < 3) throw "arguments are not enough";
         if (!user_id) throw "You must provide a user_id to search for";
         if (user_id === undefined) throw "user_id not defined";
-        if (typeof(user_id) !== "string" && typeof(user_id) !== "object") throw "user_id type must be string or object";
+        if (typeof(user_id) !== "string" && typeof(user_id) !== "object") throw "add_comment: user_id type must be string or object";
         if (typeof(user_id) !== "object") {
             user_id = ObjectId.createFromHexString(user_id);
         }
@@ -93,7 +93,7 @@ module.exports = {
         }
         if (!user_id) throw "You must provide a user_id to search for";
         if (user_id === undefined) throw "user_id not defined";
-        if (typeof(user_id) !== "string" && typeof(user_id) !== "object") throw "user_id type must be string or object";
+        if (typeof(user_id) !== "string" && typeof(user_id) !== "object") throw "updateComment: user_id type must be string or object";
         if (typeof(user_id) !== "object") {
             user_id = ObjectId.createFromHexString(user_id);
         }

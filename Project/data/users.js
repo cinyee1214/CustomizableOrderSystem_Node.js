@@ -61,8 +61,8 @@ module.exports = {
 
 
     async getUser(id) {
-        if (!id) throw "You must provide an id to search for";
-        if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
+        if (!id) throw "GetUser: You must provide an id to search for";
+        if (typeof(id) !== "string" && typeof(id) !== "object") throw "GetUser: id type must be string or object";
         if (typeof(id) !== "object") {
             id = ObjectId.createFromHexString(id);
         }
