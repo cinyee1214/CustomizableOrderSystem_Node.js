@@ -1,4 +1,4 @@
-const mongoCollections = require("../mongoCollections");
+const mongoCollections = require("../config/mongoCollections");
 const dishes = mongoCollections.dishes;
 const { ObjectId } = require('mongodb');
 
