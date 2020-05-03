@@ -52,25 +52,74 @@
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">
-                <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
-                <li class="breadcrumb-item active">Orders</li>
+                <li id="userInfo" class="breadcrumb-item active" data-id="#userDetails">User Info</li>
+                <li id="orderInfo" class="breadcrumb-item" data-id="#orders">Orders</li>
             </ol>
-            <div class="col-12">
-                <h3>Orders</h3>
-                <hr>
-            </div>
         </div>
-        <div class="row row-content">
-
+        <div>
+            <br>
+        </div>
+        <div id="orders">
+            <!-- render by js!-->
         </div>
 
-        <div class="row row-content">
-
-            <div class="col-12 col-md">
-
-            </div>
+        <div class="col-12 col-md-9" id="userDetails">
+            <form>
+                <div class="form-group row">
+                    <label for="firstname" class="col-md-2 col-form-label">First Name</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="lastname" class="col-md-2 col-form-label">Last Name</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="emailid" class="col-md-2 col-form-label">Email</label>
+                    <div class="col-md-10">
+                        <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="passwordid" class="col-md-2 col-form-label">Password</label>
+                    <div class="col-md-10">
+                        <input type="password" class="form-control" id="passwordid" name="passwordid" placeholder="New Password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="cpasswordid" class="col-md-2 col-form-label">Password</label>
+                    <div class="col-md-10">
+                        <input type="password" class="form-control" id="cpasswordid" name="cpasswordid" placeholder="Confirm Your Password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="telnum" class="col-12 col-md-2 col-form-label">Contact Tel.</label>
+                    <div class="col-md-10">
+                        <input type="tel" class="form-control" id="telnum" name="telnum" placeholder="Tel. number">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="address" class="col-12 col-md-2 col-form-label">Address</label>
+                    <div class="col-md-10">
+                        <textarea type="text" class="form-control" id="address" name="address" placeholder="Please Enter Your Deliver Address." rows="6"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-md-2 col-md-10">
+                        <button type="submit" class="btn btn-primary">Update Info</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+
+    <div class="row row-content">
+
+    </div>
+
 
     <footer class="footer">
         <div class="container">
