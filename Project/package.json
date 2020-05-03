@@ -1,7 +1,7 @@
 {
     "name": "project",
     "version": "1.0.0",
-    "description": "",
+    "description": "The final project for CS546",
     "main": "app.js",
     "scripts": {
         "seed": "node ./tasks/seed.js",
@@ -15,8 +15,13 @@
         "lite-server": "^2.3.0"
     },
     "dependencies": {
+        "bcryptjs": "^2.4.3",
         "bootstrap": "^4.0.0",
         "bootstrap-social": "^5.1.1",
+        "cookie-parser": "^1.4.5",
+        "express": "^4.17.1",
+        "express-handlebars": "^4.0.4",
+        "express-session": "^1.17.1",
         "font-awesome": "^4.7.0",
         "jquery": "^3.3.1",
         "mongodb": "^3.5.7",
