@@ -11,20 +11,12 @@ app.use('/public', static);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(async(req, res, next) => {
-    let currentTime = new Date().toUTCString();
-    let requestMethod = req.method;
-    let requestRoute = req.originalUrl;
-    console.log(`[${currentTime}]: ${requestMethod} ${requestRoute}`);
-    next();
-});
-
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 app.use(
     session({
-        name: 'UserCookie',
+        name: 'AuthCookie',
         secret: 'Some secret string!',
         resave: false,
         saveUninitialized: true,
