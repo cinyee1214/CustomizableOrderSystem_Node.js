@@ -6,8 +6,8 @@ const { ObjectId } = require('mongodb');
 
 module.exports = {
 
-    async addUser(firstName, lastName, Email, Gender, Address, Contactnumber, hashedPassword) {
-        if (arguments.length < 7) throw "arguments are not enough";
+    async addUser(firstName, lastName, Email, Address, Contactnumber, hashedPassword) {
+        if (arguments.length < 6) throw "arguments are not enough";
 
         if (!firstName) throw "You must provide a first Name";
         if (firstName === undefined) throw "first Name not defined";
@@ -18,9 +18,6 @@ module.exports = {
         if (!Email) throw "You must provide a Email";
         if (Email === undefined) throw "Email not defined";
         if (typeof Email !== "string") throw "Email value is not a string";
-        if (!Gender) throw "You must provide a Gender";
-        if (Gender === undefined) throw "Gender not defined";
-        if (typeof Gender !== "string") throw "Gender value is not a string";
         if (!Address) throw "You must provide Address";
         if (Address === undefined) throw "Address not defined";
         if (typeof Address !== "string") throw "Address value is not a string";
@@ -38,7 +35,7 @@ module.exports = {
             firstName: firstName,
             lastName: lastName,
             Email: Email,
-            Gender: Gender,
+
             Address: Address,
             Contactnumber: Contactnumber,
             hashedPassword: hashedPassword
@@ -92,7 +89,7 @@ module.exports = {
 
     },
 
-    async updateUser(id, firstName, lastName, Email, Gender, Address, Contactnumber, hashedPassword) {
+    async updateUser(id, firstName, lastName, Email, Address, Contactnumber, hashedPassword) {
         if (arguments.length < 8) throw "arguments are not enough";
         if (!id) throw "You must provide an id to search for";
         if (id === undefined) throw "id not defined";
@@ -110,9 +107,7 @@ module.exports = {
         if (!Email) throw "You must provide a Email";
         if (Email === undefined) throw "Email not defined";
         if (typeof Email !== "string") throw "Email value is not a string";
-        if (!Gender) throw "You must provide a Gender";
-        if (Gender === undefined) throw "Gender not defined";
-        if (typeof Gender !== "string") throw "Gender value is not a string";
+
         if (!Address) throw "You must provide Address";
         if (Address === undefined) throw "Address not defined";
         if (typeof Address !== "string") throw "Address value is not a string";
@@ -130,7 +125,7 @@ module.exports = {
             firstName: firstName,
             lastName: lastName,
             Email: Email,
-            Gender: Gender,
+
             Address: Address,
             Contactnumber: Contactnumber,
             hashedPassword: hashedPassword
