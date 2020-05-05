@@ -10,13 +10,12 @@ async function main() {
     const db = await dbConnection();
     await db.dropDatabase();
 
-    //three new users
-    const User1 = await users.addUser("John", "Doe", "JDoe@gmail.com", "XX Str, apt 101, Hoboken, NJ", "808-888-8888", "$2a$16$7JKSiEmoP3GNDSalogqgPu0sUbwder7CAN/5wnvCWe6xCKAKwlTD.");
-    //password: elementarymydearwatson
-    const User2 = await users.addUser("Peter", "Davis", "Peter@gmail.com", "XX Str, apt 102, Hoboken, NJ", "505-555-5555", "$2a$16$SsR2TGPD24nfBpyRlBzINeGU61AH0Yo/CbgfOlU1ajpjnPuiQaiDm");
-    //password: damnyoujackdonaghy
-    const User3 = await users.addUser("Chloe", "Smith", "Chloe@gmail.com", "XX Str, apt 103, Hoboken, NJ", "202-222-2222", "$2a$16$4o0WWtrq.ZefEmEbijNCGukCezqWTqz1VWlPm/xnaLM8d3WlS5pnK");
-    //password: quidditch
+
+    const User1 = await users.addUser("John", "Doe", "JDoe@gmail.com", "XX Str, apt 101, Hoboken, NJ", "808-888-8888", "elementarymydearwatson");
+
+    const User2 = await users.addUser("Peter", "Davis", "Peter@gmail.com", "XX Str, apt 102, Hoboken, NJ", "505-555-5555", "damnyoujackdonaghy");
+
+    const User3 = await users.addUser("Chloe", "Smith", "Chloe@gmail.com", "XX Str, apt 103, Hoboken, NJ", "202-222-2222", "quidditch");
 
 
     //dish materials selection

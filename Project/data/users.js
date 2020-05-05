@@ -1,8 +1,9 @@
 const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
 const { ObjectId } = require('mongodb');
+const bcrypt = require('bcryptjs');
 
-
+const saltRounds = 5;
 
 module.exports = {
 
@@ -30,6 +31,8 @@ module.exports = {
 
 
         const userCollection = await users();
+
+        hashedPassword = await bcrypt.hash(hashedPassword, saltRounds);
 
         let newUser = {
             firstName: firstName,
