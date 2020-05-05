@@ -35,17 +35,15 @@ module.exports = {
             firstName: firstName,
             lastName: lastName,
             Email: Email,
-
             Address: Address,
             Contactnumber: Contactnumber,
             hashedPassword: hashedPassword
         };
 
-
         const insertInfo = await userCollection.insertOne(newUser);
         if (insertInfo.insertedCount === 0) throw "Could not add user";
         const newId = insertInfo.insertedId;
-        const user = await this.getUser(newId);
+        const user = await this.getUserByID(newId);
         return user;
     },
 
@@ -57,9 +55,9 @@ module.exports = {
     },
 
 
-    async getUser(id) {
-        if (!id) throw "GetUser: You must provide an id to search for";
-        if (typeof(id) !== "string" && typeof(id) !== "object") throw "GetUser: id type must be string or object";
+    async getUserByID(id) {
+        if (!id) throw "getUserByID: You must provide an id to search for";
+        if (typeof(id) !== "string" && typeof(id) !== "object") throw "getUserByID: id type must be string or object";
         if (typeof(id) !== "object") {
             id = ObjectId.createFromHexString(id);
         }
@@ -67,6 +65,16 @@ module.exports = {
         const userCollection = await users();
         const usergo = await userCollection.findOne({ _id: id });
         if (usergo === null) throw "No user with that id";
+        return usergo;
+    },
+
+    async getUserByEmail(email) {
+        if (!email) throw "getUserByEmail: You must provide an email to search for.";
+        if (typeof email !== "string") throw "Email value is not a string";
+
+        const userCollection = await users();
+        const usergo = await userCollection.findOne({ email: email });
+        if (usergo === null) throw "No user with that email.";
         return usergo;
     },
 
@@ -78,7 +86,7 @@ module.exports = {
         }
 
         const userCollection = await users();
-        const user = await this.getUser(id);
+        const user = await this.getUserByID(id);
         const deletionInfo = await userCollection.removeOne({ _id: id });
 
         if (deletionInfo.deletedCount === 0) {
@@ -136,7 +144,7 @@ module.exports = {
             throw "could not update the user successfully";
         }
 
-        return await this.getUser(id);
+        return await this.getUserByID(id);
     }
 
 
