@@ -67,14 +67,13 @@
             <ol class="col-12 breadcrumb">
                 <li id="userInfo" class="breadcrumb-item active" data-id="#userDetails">User Info</li>
                 <li id="orderInfo" class="breadcrumb-item" data-id="#orders">Orders</li>
+
             </ol>
         </div>
         <div>
             <br>
         </div>
-        <div id="orders">
-            <!-- render by js!-->
-        </div>
+
 
         <div class="col-12 col-md-10 offset-1" id="userDetails">
             <form class="userInfoPage" id="userInfoUpdate">
@@ -126,6 +125,10 @@
                     </div>
                 </div>
             </form>
+        </div>
+
+        <div id="orders">
+            <!-- render by js!-->
         </div>
     </div>
 
@@ -187,6 +190,11 @@
     <!-- <script src="js/scripts.js"></script> -->
     <script src="/public/js/user.js"></script>
     <script src="js/user.js"></script>
+    <script>
+        $('#userInfo').click(() => {
+            alert('1');
+        })
+    </script>
 </body>
 
 </html>

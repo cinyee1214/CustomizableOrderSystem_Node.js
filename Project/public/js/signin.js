@@ -16,12 +16,6 @@ $('#login-form').submit(async(event) => {
         window.location.replace('http://localhost:3000/userOrder');
 
     } catch (error) {
-        await Swal.fire({
-            icon: 'error',
-            title: error['responseJSON']['message'],
-            showConfirmButton: false,
-            timer: 1000,
-            position: 'top',
-        });
+        alert(error);
     }
 });

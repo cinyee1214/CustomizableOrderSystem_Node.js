@@ -4,3 +4,9 @@ const router = express.Router();
 const xss = require("xss");
 const data = require('../data');
 const userData = data.users;
+
+router.get('/', async(req, res) => {
+    res.render('restaurant/userOrder', { layout: false });
+});
+
+module.exports = router;
