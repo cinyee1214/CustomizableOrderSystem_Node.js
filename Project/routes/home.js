@@ -4,7 +4,7 @@ const data = require('../data/users');
 const bcrypt = require('bcryptjs');
 
 router.get('/', async(req, res) => {
-    res.sendFile(path.resolve('public/index.html'));
+    res.render('restaurant/index', { layout: false });
 });
 
 
@@ -54,5 +54,30 @@ router.get('/logout', async(req, res) => {
     }
 });
 
+router.get('/menu', async(req, res) => {
+    if (req.session.user) {
+        res.redirect('/menu');
+        return;
+    } else {
+        res.render('login/error', { layout: false });
+    }
+});
+
+router.get('/users', async(req, res) => {
+    if (req.session.user) {
+        res.redirect('/users');
+        return;
+    } else {
+        res.render('login/error', { layout: false });
+    }
+});
+
+router.get('/about', async(req, res) => {
+    res.render('restaurant/aboutus', { layout: false });
+});
+
+router.get('/contact', async(req, res) => {
+    res.render('restaurant/contactus', { layout: false });
+});
 
 module.exports = router;
