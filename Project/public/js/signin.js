@@ -20,6 +20,7 @@ $('#login-form').submit(async(event) => {
 
 $('#signup-form').submit(async(event) => {
     event.preventDefault();
+
     const email = $('#signupEmail').val();
     const password = $('#signupPassword').val();
     const confirmedPassword = $('#signupConfirmedPassword').val();
@@ -43,14 +44,13 @@ $('#signup-form').submit(async(event) => {
 
 const user = req.session.AuthCookie;
 
-const renderEmail = () => {
+const showEmail = () => {
     if (user) {
         const userEmail = user['Email'];
         $('#loginSpan').text(userEmail);
     }
 };
 
-
 $('#signinBtn').click((event) => {
-    renderEmail();
+    showEmail();
 });
