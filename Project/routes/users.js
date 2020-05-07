@@ -18,6 +18,8 @@ router.get('/logout', async(req, res) => {
     try {
         res.clearCookie("AuthCookie");
         req.session.destroy();
+
+        res.cookie('user', '');
         res.render('login/logout', { layout: false });
     } catch (e) {
         res.status(500).json({ error: e });

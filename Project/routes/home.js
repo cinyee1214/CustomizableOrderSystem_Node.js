@@ -40,6 +40,10 @@ router.post('/login', async(req, res) => {
             return;
         }
 
+        let sessionUser = { _id: curUser._id, email: xss(curUser.Email) };
+
+        res.cookie('user', JSON.stringify(sessionUser));
+
         req.session.AuthCookie = curUser;
         res.status(200).json(curUser);
 

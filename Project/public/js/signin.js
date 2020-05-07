@@ -13,8 +13,11 @@ $('#login-form').submit(async(event) => {
             }
         });
 
+        $("#loginModal").modal('hide');
+        showWel();
+        showEmail();
     } catch (error) {
-        alert(JSON.stringify(error));
+        alert(error['responseJSON']['error']);
     }
 });
 
@@ -36,21 +39,47 @@ $('#signup-form').submit(async(event) => {
             }
         });
 
+        $("#signupModal").modal('hide');
+        showWel();
     } catch (error) {
-        alert(JSON.stringify(error));
+        alert(error['responseJSON']['error']);
     }
 });
 
 
-const user = req.session.AuthCookie;
+// const signupModal = document.getElementById("signupModal");
+// const loginModal = document.getElementById("loginModal");
+
 
 const showEmail = () => {
-    if (user) {
-        const userEmail = user['Email'];
-        $('#loginSpan').text(userEmail);
+    if (!Cookies.get('user')) {
+        return;
+    }
+    const userInfo = JSON.parse(Cookies.get('user'));
+    if (userInfo) {
+        const userEmail = userInfo['email'];
+
+        $('#loginA').text(userEmail);
+        // loginModal.hidden = true;
+
+        $('#signupA').text("Welcome!");
+        // signupModal.hidden = true;
+        $('#loginA').removeAttr('data-toggle');
+        $('#signupA').removeAttr('data-toggle');
+
     }
 };
 
-$('#signinBtn').click((event) => {
-    showEmail();
-});
+const showWel = () => {
+    if (!Cookies.get('user')) {
+        return;
+    }
+    const userInfo = JSON.parse(Cookies.get('user'));
+    if (userInfo) {
+        $('#signupA').text("Welcome!");
+        $('#signupA').removeAttr('data-toggle');
+    }
+};
+
+
+showEmail();
