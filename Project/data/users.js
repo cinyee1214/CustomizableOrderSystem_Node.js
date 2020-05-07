@@ -8,26 +8,25 @@ const saltRounds = 5;
 module.exports = {
 
     async addUser(firstName, lastName, Email, Address, Contactnumber, hashedPassword) {
-        if (arguments.length < 6) throw "arguments are not enough";
+        // if (arguments.length < 6) throw "arguments are not enough";
 
-        if (!firstName) throw "You must provide a first Name";
-        if (firstName === undefined) throw "first Name not defined";
-        if (typeof firstName !== "string") throw "first Name value is not a string";
-        if (!lastName) throw "You must provide a last Name";
-        if (lastName === undefined) throw "last Name not defined";
-        if (typeof lastName !== "string") throw "last Name value is not a string";
-        if (!Email) throw "You must provide a Email";
-        if (Email === undefined) throw "Email not defined";
-        if (typeof Email !== "string") throw "Email value is not a string";
-        if (!Address) throw "You must provide Address";
-        if (Address === undefined) throw "Address not defined";
-        if (typeof Address !== "string") throw "Address value is not a string";
-        if (!Contactnumber) throw "You must provide Contact number";
-        if (Contactnumber === undefined) throw "Contact number not defined";
-        if (typeof Contactnumber !== "string") throw "Contact number value is not a string";
-        if (!hashedPassword) throw "You must provide hashedPassword";
-        if (hashedPassword === undefined) throw "hashedPassword not defined";
-        if (typeof hashedPassword !== "string") throw "hashedPassword value is not a string";
+
+
+        // if (!lastName) throw "You must provide a last Name";
+
+        // if (typeof lastName !== "string") throw "last Name value is not a string";
+        // if (!Email) throw "You must provide a Email";
+
+        // if (typeof Email !== "string") throw "Email value is not a string";
+        // if (!Address) throw "You must provide Address";
+
+        // if (typeof Address !== "string") throw "Address value is not a string";
+        // if (!Contactnumber) throw "You must provide Contact number";
+
+        // if (typeof Contactnumber !== "string") throw "Contact number value is not a string";
+        // if (!hashedPassword) throw "You must provide hashedPassword";
+
+        // if (typeof hashedPassword !== "string") throw "hashedPassword value is not a string";
 
 
         const userCollection = await users();
@@ -77,7 +76,7 @@ module.exports = {
 
         const userCollection = await users();
         const usergo = await userCollection.findOne({ email: email });
-        if (usergo === null) throw "No user with that email.";
+
         return usergo;
     },
 

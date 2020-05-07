@@ -42,50 +42,37 @@ router.post('/login', async(req, res) => {
 
 });
 
-router.post('/signUp', async (req, res) => {
+router.post('/signup', async(req, res) => {
 
     const { email, password, confirmedPassword } = req.body;
-    if (!email || !password) {
+    if (!email || !password || !confirmedPassword) {
         const error = "401: you must provide the email and the password!";
         res.status(401).json({ error: error });
     }
     if (password !== confirmedPassword) {
-        const error = "401 : the password and the confirmed password is not the same!";
+        const error = "401 : the password and the confirmed password are not the same!";
         res.status(401).json({ error: error });
     }
-    let hashedPassword = bcrypt.hash(password, saltRound);
+
     try {
         let user = await data.getUserByEmail(email);
         if (user !== null) {
-            const error = "401: the user has existed";
+            const error = "401: The user already existed, please signin.";
             res.status(401).json({ error: error });
             return;
+        } else {
+            const NewUser = await data.addUser("", "", email, "", "", password);
+            res.status(200).json(NewUser);
         }
-        else {
-
-            let NewUser = {
-                firstName: "",
-                lastName: "",
-                Email: email,
-                Address: "",
-                contanctNumber: "",
-                hashedPassword: hashedPassword
-            };
-            await data.addUser("", "", email, "", "", hashedPassword);
-            req.session.AuthCookie = user;
-            return;
-        }
-
-
     } catch (e) {
+        // res.status(500).json({ error: "SignUp failed." });
         res.status(500).json({ error: e });
-        return;
     }
 
 })
 
 
-router.get('/logout', async (req, res) => {
+router.get('/logout', async(req, res) => {
     try {
         res.clearCookie("AuthCookie");
         req.session.destroy();
