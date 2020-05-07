@@ -20,6 +20,8 @@ router.post('/login', async(req, res) => {
     try {
         let curUser = await data.getUserByEmail(email);
 
+        // console.log(curUser);
+
         if (!curUser) {
             const error = '401: User not found! You must provide a valid user email!';
             res.status(401).json({ error: error });
@@ -35,11 +37,11 @@ router.post('/login', async(req, res) => {
         }
 
         req.session.AuthCookie = curUser;
+        res.status(200).json(curUser);
 
     } catch (e) {
         res.status(500).json({ error: e });
     }
-
 });
 
 router.post('/signup', async(req, res) => {
@@ -68,7 +70,6 @@ router.post('/signup', async(req, res) => {
         // res.status(500).json({ error: "SignUp failed." });
         res.status(500).json({ error: e });
     }
-
 })
 
 
@@ -93,7 +94,7 @@ router.get('/logout', async(req, res) => {
 });
 
 router.get('/menu', async(req, res) => {
-    if (req.session.user) {
+    if (req.session.AuthCookie) {
         res.redirect('/menu');
         return;
     } else {
@@ -102,7 +103,7 @@ router.get('/menu', async(req, res) => {
 });
 
 router.get('/users', async(req, res) => {
-    if (req.session.user) {
+    if (req.session.AuthCookie) {
         res.redirect('/users');
         return;
     } else {

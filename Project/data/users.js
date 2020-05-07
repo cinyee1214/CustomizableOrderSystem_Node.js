@@ -7,10 +7,8 @@ const saltRounds = 5;
 
 module.exports = {
 
-    async addUser(firstName, lastName, Email, Address, Contactnumber, hashedPassword) {
+    async addUser(firstName, lastName, Email, Address, Contactnumber, password) {
         // if (arguments.length < 6) throw "arguments are not enough";
-
-
 
         // if (!lastName) throw "You must provide a last Name";
 
@@ -31,7 +29,7 @@ module.exports = {
 
         const userCollection = await users();
 
-        hashedPassword = await bcrypt.hash(hashedPassword, saltRounds);
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         let newUser = {
             firstName: firstName,
@@ -66,18 +64,17 @@ module.exports = {
 
         const userCollection = await users();
         const usergo = await userCollection.findOne({ _id: id });
-        if (usergo === null) throw "No user with that id";
+        if (!usergo) throw "No user with that id";
         return usergo;
     },
 
     async getUserByEmail(email) {
-        if (!email) throw "getUserByEmail: You must provide an email to search for.";
-        if (typeof email !== "string") throw "Email value is not a string";
 
         const userCollection = await users();
-        const usergo = await userCollection.findOne({ email: email });
 
-        return usergo;
+        const user = await userCollection.findOne({ Email: email });
+
+        return user;
     },
 
     async removeUser(id) {
