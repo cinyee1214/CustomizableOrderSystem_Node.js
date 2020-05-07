@@ -6,7 +6,22 @@ const data = require('../data');
 const userData = data.users;
 
 router.get('/', async(req, res) => {
-    res.render('restaurant/menu', { layout: false });
+    if (req.session.AuthCookie) {
+        res.render('restaurant/menu', { layout: false });
+        return;
+    } else {
+        res.render('login/error', { layout: false });
+    }
+});
+
+router.get('/logout', async(req, res) => {
+    try {
+        res.clearCookie("AuthCookie");
+        req.session.destroy();
+        res.status(200).render('login/logout', { layout: false });
+    } catch (e) {
+        res.status(500).json({ error: e });
+    }
 });
 
 module.exports = router;

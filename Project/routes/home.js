@@ -73,29 +73,9 @@ router.post('/signup', async(req, res) => {
 })
 
 
-router.get('/logout', async(req, res) => {
-    try {
-        res.clearCookie("AuthCookie");
-        req.session.destroy();
-        res.status(200).json({ message: 'Logout successfully!' });
-    } catch (e) {
-        res.status(500).json({ error: e });
-    }
-});
-
-router.get('/logout', async(req, res) => {
-    try {
-        res.clearCookie("AuthCookie");
-        req.session.destroy();
-        res.status(200).json({ message: 'Logout successfully!' });
-    } catch (e) {
-        res.status(500).json({ error: e });
-    }
-});
-
 router.get('/menu', async(req, res) => {
     if (req.session.AuthCookie) {
-        res.redirect('/menu');
+        res.render('restaurant/menu', { layout: false });
         return;
     } else {
         res.render('login/error', { layout: false });
@@ -104,12 +84,14 @@ router.get('/menu', async(req, res) => {
 
 router.get('/users', async(req, res) => {
     if (req.session.AuthCookie) {
-        res.redirect('/users');
+        res.render('restaurant/userOrder', { layout: false });
         return;
     } else {
         res.render('login/error', { layout: false });
     }
 });
+
+
 
 router.get('/about', async(req, res) => {
     res.render('restaurant/aboutus', { layout: false });
