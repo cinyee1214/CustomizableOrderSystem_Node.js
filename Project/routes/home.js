@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const data = require('../data/users');
 const bcrypt = require('bcryptjs');
+const xss = require("xss");
 
 router.get('/', async(req, res) => {
     res.render('restaurant/index', { layout: false });
@@ -18,7 +19,7 @@ router.post('/login', async(req, res) => {
     }
 
     try {
-        let curUser = await data.getUserByEmail(email);
+        let curUser = await data.getUserByEmail(xss(email));
 
         // console.log(curUser);
 
@@ -28,7 +29,10 @@ router.post('/login', async(req, res) => {
             return;
         }
 
-        let match = await bcrypt.compare(password, curUser.hashedPassword);
+        let match = await bcrypt.compare(
+            xss(password),
+            xss(curUser.hashedPassword)
+        );
 
         if (!match) {
             const error = '401: Password not correct! You must provide a valid password!';
@@ -57,13 +61,13 @@ router.post('/signup', async(req, res) => {
     }
 
     try {
-        let user = await data.getUserByEmail(email);
+        let user = await data.getUserByEmail(xss(email));
         if (user !== null) {
             const error = "401: The user already existed, please signin.";
             res.status(401).json({ error: error });
             return;
         } else {
-            const NewUser = await data.addUser("", "", email, "", "", password);
+            const NewUser = await data.addUser("", "", xss(email), "", "", xss(password));
             res.status(200).json(NewUser);
         }
     } catch (e) {
