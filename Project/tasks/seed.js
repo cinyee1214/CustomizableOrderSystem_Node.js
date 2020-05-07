@@ -4,13 +4,17 @@ const users = data.users;
 const dishes = data.dishes;
 const finishedDishes = data.finishedDishes;
 const comments = data.comments;
+const feedbacks = data.feedbacks;
 
 async function main() {
     console.log("Connected to the database");
     const db = await dbConnection();
     await db.dropDatabase();
 
+    //feedback
+    const feedback = await feedbacks.addFeedback("John", "Doe", "1", "81288844", "JDoe@gmail.com", "test feedback");
 
+    //user
     const User1 = await users.addUser("John", "Doe", "JDoe@gmail.com", "XX Str, apt 101, Hoboken, NJ", "808-888-8888", "elementarymydearwatson");
 
     const User2 = await users.addUser("Peter", "Davis", "Peter@gmail.com", "XX Str, apt 102, Hoboken, NJ", "505-555-5555", "damnyoujackdonaghy");
@@ -25,7 +29,7 @@ async function main() {
     let flavor = ['Spicy', 'Mild'];
     let carbohydrate = ['Rice', 'Noodles'];
     let drink = ['Soda', 'Milk'];
-    //A total of 64 combinations
+    //A total of 192 combinations
     let Dish = new Array(192);
     let index = 0;
     for (let a = 0; a < 4; a++) {

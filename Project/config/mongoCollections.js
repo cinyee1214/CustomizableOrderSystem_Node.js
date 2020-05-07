@@ -17,5 +17,6 @@ module.exports = {
     users: getCollectionFn("users"),
     dishes: getCollectionFn("dishes"),
     finishedDishes: getCollectionFn("finishedDishes"),
-    comments: getCollectionFn("comments")
+    comments: getCollectionFn("comments"),
+    feedbacks: getCollectionFn("feedbacks")
 };

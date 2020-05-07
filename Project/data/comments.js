@@ -60,7 +60,7 @@ module.exports = {
 
         const commentCollection = await comments();
         const commentgo = await commentCollection.findOne({ _id: id });
-        if (commentgo === null) throw "No comment txt with that id";
+        if (commentgo === null) throw "No comment text with that id";
         return commentgo;
     },
 

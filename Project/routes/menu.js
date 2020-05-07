@@ -18,7 +18,7 @@ router.get('/logout', async(req, res) => {
     try {
         res.clearCookie("AuthCookie");
         req.session.destroy();
-        res.status(200).render('login/logout', { layout: false });
+        res.render('login/logout', { layout: false });
     } catch (e) {
         res.status(500).json({ error: e });
     }

@@ -39,13 +39,13 @@
                     <li class="nav-item">
                         <span class="navbar-text">
                             <a data-toggle="modal" data-target="#signupModal" class="btn btn-outline-dark">
-                            <span class="fa fa-sign-in"></span> Signup</a>
+                            <span class="fa fa-sign-in" id="signupSpan"></span> Signup</a>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="navbar-text">
                             <a data-toggle="modal" data-target="#loginModal" class="btn btn-outline-dark">
-                            <span class="fa fa-sign-in"></span>Login</a>
+                            <span class="fa fa-sign-in" id="loginSpan"></span>Login</a>
                         </span>
                     </li>
                 </ul>
@@ -62,19 +62,19 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="signup-form" class="signup-form">
                         <div class="form-row">
                             <div class="form-group col-sm-4">
-                                <label class="sr-only" for="exampleInputEmail4">Email address</label>
-                                <input type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail4" placeholder="Enter email">
+                                <label class="sr-only" for="signupEmail">Email address</label>
+                                <input type="email" class="form-control form-control-sm mr-1" id="signupEmail" placeholder="Enter email">
                             </div>
                             <div class="form-group col-sm-4">
-                                <label class="sr-only" for="exampleInputPassword4">Password</label>
-                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword4" placeholder="Password">
+                                <label class="sr-only" for="signupPassword">Password</label>
+                                <input type="password" class="form-control form-control-sm mr-1" id="signupPassword" placeholder="Password">
                             </div>
                             <div class="form-group col-sm-4">
-                                <label class="sr-only" for="exampleInputPassword5">Password</label>
-                                <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword5" placeholder="Password">
+                                <label class="sr-only" for="signupConfirmedPassword">Password</label>
+                                <input type="password" class="form-control form-control-sm mr-1" id="signupConfirmedPassword" placeholder="Comfirmed Password">
                             </div>
                             <div class="col-sm-auto">
                                 <div class="form-check">
@@ -85,8 +85,8 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <button type="button" class="btn btn-secondary btn-sm ml-auto" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary btn-sm ml-1">Sign up</button>
+                            <button id="cancelSignupBtn" type="button" class="btn btn-secondary btn-sm ml-auto" data-dismiss="modal">Cancel</button>
+                            <button id="signupBtn" type="submit" class="btn btn-primary btn-sm ml-1">Sign up</button>
                         </div>
                     </form>
                 </div>
@@ -103,7 +103,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form id="login-form">
+                    <form id="login-form" class="login-form">
                         <div class="form-row">
                             <div class="form-group col-sm-4">
                                 <label class="sr-only" for="signinEmail">Email address</label>
@@ -122,8 +122,8 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <button type="button" class="btn btn-secondary btn-sm ml-auto" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary btn-sm ml-1">Sign in</button>
+                            <button id="cancelSigninBtn" type="button" class="btn btn-secondary btn-sm ml-auto" data-dismiss="modal">Cancel</button>
+                            <button id="signinBtn" type="submit" class="btn btn-primary btn-sm ml-1">Sign in</button>
                         </div>
                     </form>
                 </div>
@@ -253,6 +253,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="js/signin.js"></script>
 
 </body>
 
