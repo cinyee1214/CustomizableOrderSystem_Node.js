@@ -74,15 +74,44 @@ router.post('/customize', async(req, res) => {
 
 });
 
-router.post('/hotpot', async(req, res) => {
+router.post('/hotpot', async (req, res) => {
     if (!req.session.AuthCookie) {
         res.render('login/error', { layout: false });
         return;
     }
-
     const { numOfGuest, section, date } = req.body;
-});
+    if (!numOfGuest) {
+        const error = "the desk information is not ok!";
+        res.status(401).json({ error: error });
+        return;
+    }
+    if (!section) {
+        const error = "the section is not ok";
+        res.status(401).json({ error: error });
+        return;
+    }
+    if (!date) {
+        const error = "the date is not ok!";
+        res.status(401).json({ error: error });
+        return;
+    }
+    try {
+        const curuser = req.session.AuthCookie;
+        let Hotpot = await HotpotData.addHotpot(curuser._id, xss(numOfGuest), xss(section), xss(date));
+        if (Hotpot === null) {
+            const error = "The order cannot be submitted";
+            res.status(401).json({ error: error });
+            return;
+        }
+        else {
+            res.status(200).json(Hotpot);
+        }
 
+    } catch (e) {
+        res.status(500).json({ error: e });
+        return;
+    }
+});
 
 module.exports = router;
 

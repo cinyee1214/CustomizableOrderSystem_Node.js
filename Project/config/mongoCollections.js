@@ -18,5 +18,6 @@ module.exports = {
     dishes: getCollectionFn("dishes"),
     finishedDishes: getCollectionFn("finishedDishes"),
     comments: getCollectionFn("comments"),
-    feedbacks: getCollectionFn("feedbacks")
+    feedbacks: getCollectionFn("feedbacks"),
+    hotpot: getCollectionFn("hotpot")
 };
