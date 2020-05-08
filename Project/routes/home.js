@@ -78,7 +78,7 @@ router.post('/signup', async(req, res) => {
         // res.status(500).json({ error: "SignUp failed." });
         res.status(500).json({ error: e });
     }
-})
+});
 
 
 router.get('/menu', async(req, res) => {
