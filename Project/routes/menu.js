@@ -52,14 +52,18 @@ router.post('/customize', async(req, res) => {
 
         let product = `${cookingstyle}ed ${flavor} ${meat} with ${vegetable} serving with ${carbohydrate} and ${drink}`;
         let newDish = await MenuData.addDish(curUser._id, xss(vegetable), xss(meat), xss(cookingstyle), xss(flavor), xss(carbohydrate), xss(drink), product);
+
         if (!newDish) {
             const error = "401 : The dish cannot be served.";
             res.status(401).json({ error: error });
             return;
-        } else {
-            res.status(200).json(newDish);
-
         }
+
+        let sessionCostomize = { _id: newDish._id };
+
+        res.cookie('cos', JSON.stringify(sessionCostomize));
+
+        res.status(200).json(newDish);
     } catch (e) {
 
         res.status(500).json({ error: e });
@@ -72,10 +76,12 @@ router.post('/hotpot', async(req, res) => {
         res.render('login/error', { layout: false });
         return;
     }
+
+    const { numOfGuest, section, date } = req.body;
 });
 
 
-
+module.exports = router;
 
 
 // router.post("/FDishes", async(req, res) => {
@@ -101,7 +107,7 @@ router.post('/hotpot', async(req, res) => {
 //     }
 // });
 
-module.exports = router;
+
 
 
 
