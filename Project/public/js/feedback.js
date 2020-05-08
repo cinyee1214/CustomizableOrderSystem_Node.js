@@ -5,7 +5,7 @@ $('#feedback-form').submit(async(event) => {
     const lastname = $('#lastname').val();
     const areacode = $('#areacode').val();
     const telnum = $('#telnum').val();
-    const emailid = $('#emialid').val();
+    const email = $('#emailid').val();
     const feedback = $('#feedback').val();
 
     try {
@@ -17,7 +17,7 @@ $('#feedback-form').submit(async(event) => {
                 lastname: lastname,
                 areacode: areacode,
                 telnum: telnum,
-                emailid: emailid,
+                email: email,
                 feedback: feedback
             }
         });
@@ -25,6 +25,6 @@ $('#feedback-form').submit(async(event) => {
         alert('Your feedback has been sent to us successfully!');
 
     } catch (error) {
-        alert(JSON.stringify(error));
+        alert(error['responseJSON']['error']);
     }
 });
