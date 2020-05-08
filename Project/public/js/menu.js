@@ -34,11 +34,65 @@ $('#reserve-form').submit(async(event) => {
     }
 });
 
-if (Cookies.get('hotpot')) {
-    $('#reserveA').removeAttr('data-toggle');
-}
+// if (Cookies.get('hotpot')) {
+//     $('#reserveA').removeAttr('data-toggle');
+// }
 
-$('#customize-form').submit(async(event) => {
+// $('#customize-form').submit(async(event) => {
+//     event.preventDefault();
+
+//     var veg = $("input[name='vegeNumber']:checked").val();
+//     console.log(veg);
+
+//     var meat = $("input[name='meatNumber']:checked").val();
+//     console.log(meat);
+
+//     var cookingstyle = $("input[name='cookingStyleNumber']:checked").val();
+//     console.log(cookingstyle);
+
+//     var flavor = $("input[name='FlavorNumber']:checked").val();
+//     console.log(flavor);
+
+//     var carbohydrate = $("input[name='carbohydrateNumber']:checked").val();
+//     console.log(carbohydrate);
+
+//     var drink = $("input[name='drinkNumber']:checked").val();
+//     console.log(drink);
+
+//     try {
+//         console.log(11);
+
+//         $("#orderModal").modal('hide');
+
+//         await $.ajax({
+//             url: 'http://localhost:3000/menu/customize',
+//             type: 'POST',
+//             data: {
+//                 vegetable: veg,
+//                 meat: meat,
+//                 cookingstyle: cookingstyle,
+//                 flavor: flavor,
+//                 carbohydrate: carbohydrate,
+//                 drink: drink
+//             }
+//         });
+
+//         console.log(14);
+
+//     } catch (error) {
+//         alert(error['responseJSON']['error']);
+//     }
+// });
+
+// if (Cookies.get('cos')) {
+//     $('#orderA').removeAttr('data-toggle');
+//     $('#orderA').removeAttr('data-target');
+//     const cosInfo = JSON.parse(Cookies.get('cos'));
+//     console.log(cosInfo);
+// }
+
+
+$('#orderA').click(async(event) => {
     event.preventDefault();
 
     var veg = $("input[name='vegeNumber']:checked").val();
@@ -59,31 +113,38 @@ $('#customize-form').submit(async(event) => {
     var drink = $("input[name='drinkNumber']:checked").val();
     console.log(drink);
 
-    try {
-        console.log(11);
+    if (!veg || !meat || !cookingstyle || !flavor || !carbohydrate || !drink) {
 
-        $("#orderModal").modal('hide');
-
-        await $.ajax({
-            url: 'http://localhost:3000/menu/customize',
-            type: 'POST',
-            data: {
-                vegetable: veg,
-                meat: meat,
-                cookingstyle: cookingstyle,
-                flavor: flavor,
-                carbohydrate: carbohydrate,
-                drink: drink
-            }
-        });
-
-        console.log(14);
-
-    } catch (error) {
-        alert(error['responseJSON']['error']);
+        alert("Please select one kind of each ingredient!");
+        return;
     }
-});
 
-if (Cookies.get('cos')) {
-    $('#orderA').removeAttr('data-toggle');
-}
+    const info = "Your order is: " + cookingstyle + " " + flavor + " " + meat + " with " + veg + " serving with " + carbohydrate + " and " + drink;
+    $('#orderP').text(info);
+
+    $('#customize-form').submit(async(event) => {
+        try {
+            $("#orderModal").modal('hide');
+
+            await $.ajax({
+                url: 'http://localhost:3000/menu/customize',
+                type: 'POST',
+                data: {
+                    vegetable: veg,
+                    meat: meat,
+                    cookingstyle: cookingstyle,
+                    flavor: flavor,
+                    carbohydrate: carbohydrate,
+                    drink: drink
+                }
+            });
+
+            console.log(14);
+
+        } catch (error) {
+            alert(error['responseJSON']['error']);
+        }
+    });
+
+
+});

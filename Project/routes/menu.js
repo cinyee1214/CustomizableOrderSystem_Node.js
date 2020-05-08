@@ -53,7 +53,7 @@ router.post('/customize', async(req, res) => {
     try {
         const curUser = req.session.AuthCookie;
 
-        let product = `${cookingstyle}ed ${flavor} ${meat} with ${vegetable} serving with ${carbohydrate} and ${drink}`;
+        let product = `${cookingstyle} ${flavor} ${meat} with ${vegetable} serving with ${carbohydrate} and ${drink}`;
         let newDish = await MenuData.addDish(curUser._id, xss(vegetable), xss(meat), xss(cookingstyle), xss(flavor), xss(carbohydrate), xss(drink), product);
 
         if (!newDish) {
