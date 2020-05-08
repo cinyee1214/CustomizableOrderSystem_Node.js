@@ -91,11 +91,50 @@ router.post('/hotpot', async(req, res) => {
         res.status(401).json({ error: error });
         return;
     }
-    if (!date) {
-        const error = "Please provide the valid date!";
+    if (!date || typeof date !== "object" || date.length != 3) {
+        const error = "Please provide a valid date to reserve!";
         res.status(401).json({ error: error });
         return;
     }
+
+    console.log(date);
+
+    var today = new Date();
+
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    const year = today.getFullYear();
+
+    // console.log(month);
+    // console.log(day);
+    // console.log(year);
+
+    // console.log(date[0]);
+    // console.log(date[1]);
+    // console.log(date[2]);
+
+    if (date[0] < month || date[1] < day || date[2] != year) {
+        const error = "Please reserve for today or within two weeks!";
+        res.status(401).json({ error: error });
+        return;
+    }
+
+    // if (date[0] < month) {
+    //     const error = "Please reserve for today or within two weeks!";
+    //     res.status(401).json({ error: error });
+    //     return;
+    // }
+    // if (date[1] < day) {
+    //     const error = "Please reserve for today or within two weeks!";
+    //     res.status(401).json({ error: error });
+    //     return;
+    // }
+    // if (date[0] < month) {
+    //     const error = "Please reserve for today or within two weeks!";
+    //     res.status(401).json({ error: error });
+    //     return;
+    // }
+
 
     try {
         const curuser = req.session.AuthCookie;
