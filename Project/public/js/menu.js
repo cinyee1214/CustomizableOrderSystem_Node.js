@@ -6,6 +6,12 @@ $('#reserve-form').submit(async(event) => {
     var num = $("input[name='guestNumber']:checked").val();
     console.log(num);
 
+    var section = $("input[name='options']:checked").val();
+    console.log(section);
+
+    var date = new Date($('#reserveDate').val());
+    console.log(date);
+
     try {
         console.log(10);
 
@@ -15,7 +21,9 @@ $('#reserve-form').submit(async(event) => {
             url: 'http://localhost:3000/menu/hotpot',
             type: 'POST',
             data: {
-                num: num
+                numOfGuest: num,
+                section: section,
+                data: date
             }
         });
 
