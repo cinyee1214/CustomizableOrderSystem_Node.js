@@ -7,7 +7,6 @@ $('#feedback-form').submit(async(event) => {
     const telnum = $('#telnum').val();
     const emailid = $('#emialid').val();
     const feedback = $('#feedback').val();
-    console.log(firstname);
 
     try {
         await $.ajax({
@@ -22,6 +21,8 @@ $('#feedback-form').submit(async(event) => {
                 feedback: feedback
             }
         });
+
+        alert('Your feedback has been sent to us successfully!');
 
     } catch (error) {
         alert(JSON.stringify(error));
