@@ -3,7 +3,7 @@ const dishData = require("./dishes");
 const finishedDishData = require("./finishedDishes");
 const commentData = require("./comments");
 const feedbackData = require("./feedbacks");
-const hotpotData = require("./hotpot");
+const hotpotData = require("./hotpots");
 
 module.exports = {
     users: userData,
@@ -11,5 +11,5 @@ module.exports = {
     finishedDishes: finishedDishData,
     comments: commentData,
     feedbacks: feedbackData,
-    hotpot: hotpotData
+    hotpots: hotpotData
 };

@@ -48,6 +48,7 @@ module.exports = {
         const insertInfo = await dishCollection.insertOne(newDish);
         if (insertInfo.insertedCount === 0) throw "Could not add dish.";
         const newId = insertInfo.insertedId;
+        console.log("dishId: " + newId);
         const dish = await this.getDish(newId);
         return dish;
     },

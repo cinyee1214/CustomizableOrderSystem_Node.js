@@ -3,8 +3,8 @@ const express = require("express");
 const router = express.Router();
 const xss = require("xss");
 const data = require('../data');
-const userData = data.users;
 const MenuData = data.dishes;
+const HotpotData = data.hotpots;
 // const finishedMenu = data.finishedDishes;
 
 router.get('/', async(req, res) => {
@@ -74,38 +74,44 @@ router.post('/customize', async(req, res) => {
 
 });
 
-router.post('/hotpot', async (req, res) => {
+router.post('/hotpot', async(req, res) => {
     if (!req.session.AuthCookie) {
         res.render('login/error', { layout: false });
         return;
     }
+
     const { numOfGuest, section, date } = req.body;
     if (!numOfGuest) {
-        const error = "the desk information is not ok!";
+        const error = "Please provide the number of guests!";
         res.status(401).json({ error: error });
         return;
     }
     if (!section) {
-        const error = "the section is not ok";
+        const error = "Please provide the section!";
         res.status(401).json({ error: error });
         return;
     }
     if (!date) {
-        const error = "the date is not ok!";
+        const error = "Please provide the valid date!";
         res.status(401).json({ error: error });
         return;
     }
+
     try {
         const curuser = req.session.AuthCookie;
         let Hotpot = await HotpotData.addHotpot(curuser._id, xss(numOfGuest), xss(section), xss(date));
+
         if (Hotpot === null) {
             const error = "The order cannot be submitted";
             res.status(401).json({ error: error });
             return;
         }
-        else {
-            res.status(200).json(Hotpot);
-        }
+
+        let sessionCostomize = { _id: Hotpot._id };
+
+        res.cookie('hotpot', JSON.stringify(sessionCostomize));
+
+        res.status(200).json(Hotpot);
 
     } catch (e) {
         res.status(500).json({ error: e });

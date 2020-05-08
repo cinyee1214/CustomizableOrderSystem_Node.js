@@ -1,37 +1,47 @@
 const mongoCollections = require("../config/mongoCollections");
-const hotpot = mongoCollections.hotpot;
+const hotpots = mongoCollections.hotpots;
 const { ObjectId } = require('mongodb');
+
 module.exports = {
     async addHotpot(user_id, numofGuest, section, date) {
-        const hotpotCollection = await hotpot();
+        const hotpotCollection = await hotpots();
         let newHotpot = {
             userId: user_id,
             numofGuest: numofGuest,
             section: section,
             date: date
         };
-        const insertInfo = hotpotCollection.insertOne(newHotpot);
+
+        const insertInfo = await hotpotCollection.insertOne(newHotpot);
         if (insertInfo.insertedCount === 0) throw "Could not add Hotpot.";
-        const newId = insertInfo.insertedId;
-        console.log(newId);
-        let Hotpot = await this.getHotpot(newId);
+
+        // console.log(1);
+        console.log(insertInfo.insertedCount);
+        const hotpotId = insertInfo.insertedId;
+
+        // console.log(hotpotId);
+        let Hotpot = await this.getHotpot(hotpotId);
+
+        console.log(2);
         return Hotpot;
 
     },
     async getHotpot(id) {
-        if (!id) throw "You must provide an userid to search for";
-        if (typeof (id) !== "string") throw "id type must be string";
-        if (typeof (id) !== "object") {
+        console.log(3);
+
+        if (!id) throw "You must provide an hotpot_id to search for";
+        if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string";
+        if (typeof(id) !== "object") {
             id = ObjectId.createFromHexString(id);
         }
 
-        const hotpotCollection = await hotpot();
+        const hotpotCollection = await hotpots();
         const reserveHotpot = await hotpotCollection.findOne({ _id: id });
-        if (reserveHotpot === null) throw "No dish with that id";
+        if (reserveHotpot === null) throw "No hotpot with that id";
         return reserveHotpot;
     },
     async getAllHotpot() {
-        const HotpotCollection = await hotpot();
+        const HotpotCollection = await hotpots();
         const allHotpot = await HotpotCollection.find({}).toArray();
         return allHotpot;
     },
@@ -39,12 +49,12 @@ module.exports = {
 
     async removeHotpot(id) {
         if (!id) throw "You must provide an Userid to search for";
-        if (typeof (id) !== "string" && typeof (id) !== "object") throw "id type must be string or object";
-        if (typeof (id) !== "object") {
+        if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
+        if (typeof(id) !== "object") {
             id = ObjectId.createFromHexString(id);
         }
 
-        const HotpotCollection = await hotpot();
+        const HotpotCollection = await hotpots();
         const deleledHotpot = await this.getHotpot(id);
         const deletionInfo = await HotpotCollection.removeOne({ _id: id });
 
@@ -52,27 +62,27 @@ module.exports = {
             throw `Could not delete dish with id of ${id},it does not exist`;
         }
 
-        return deletedHotpot;
+        return deleledHotpot;
 
     },
 
-    async updateDish(id, numofGuest, section, date) {
+    async updateHotpot(id, numofGuest, section, date) {
         if (arguments.length < 4) throw "arguments are not enough";
         if (!id) throw "You must provide an id to search for";
         if (id === undefined) throw "id not defined";
-        if (typeof (id) !== "string" && typeof (id) !== "object") throw "id type must be string or object";
-        if (typeof (id) !== "object") {
+        if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
+        if (typeof(id) !== "object") {
             id = ObjectId.createFromHexString(id);
         }
         if (!numofGuest) throw "You have to provide the Guest number";
-        if (typeof (numofGuest) !== "string") throw "You have to provide the number of the guest";
+        if (typeof(numofGuest) !== "string") throw "You have to provide the number of the guest";
         if (!section) throw "You have to provide a section";
         if (section != "smoked" || section != "unsmoked") throw "you have to provide a valid section";
         if (date === undefined) throw "The date is invalid";
-        if (typeof (date) !== "string") throw "The date is not a string";
+        if (typeof(date) !== "string") throw "The date is not a string";
 
 
-        const HotpotCollection = await hotpot();
+        const HotpotCollection = await hotpots();
 
         const updatedHotpot = {
             numofGuest: numofGuest,

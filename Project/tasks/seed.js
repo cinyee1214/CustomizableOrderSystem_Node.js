@@ -5,6 +5,7 @@ const dishes = data.dishes;
 const finishedDishes = data.finishedDishes;
 const comments = data.comments;
 const feedbacks = data.feedbacks;
+const hotpots = data.hotpots;
 
 async function main() {
     console.log("Connected to the database");
@@ -21,11 +22,13 @@ async function main() {
 
     const User3 = await users.addUser("Chloe", "Smith", "Chloe@gmail.com", "XX Str, apt 103, Hoboken, NJ", "202-222-2222", "quidditch");
 
+    const admin = await users.addUser("Admin", "ZZ", "admin@gmail.com", "XX Str, apt 107, Hoboken, NJ", "202-222-2227", "test");
+
 
 
 
     //dish materials selection
-    // let vegetable = ['Tomatao', 'Potato', 'Mushroom', 'Eggplant'];
+    // let vegetable = ['Tomato', 'Potato', 'Mushroom', 'Eggplant'];
     // let meat = ['Beef', 'Pork', 'Chicken'];
     // let cookingstyle = ['Stew', 'Fry'];
     // let flavor = ['Spicy', 'Mild'];
@@ -72,6 +75,28 @@ async function main() {
     //     FinishedDish1._id,
     //     "Very dilicious"
     // );
+
+
+
+
+    // Data_dish test
+    const dish1 = await dishes.addDish(
+        "Tomato",
+        "pork",
+        "stew",
+        "mild",
+        "rice",
+        "milk",
+        "stewed mild tomato with pork, serving with rice and milk."
+    );
+
+    // Data_hotpot test
+    const hotpot1 = await hotpots.addHotpot(
+        User1._id,
+        "4",
+        "non-smoking",
+        "05/12/2020"
+    );
 
 
     console.log('Done seeding database');
