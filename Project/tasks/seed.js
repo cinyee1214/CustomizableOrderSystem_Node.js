@@ -22,54 +22,56 @@ async function main() {
     const User3 = await users.addUser("Chloe", "Smith", "Chloe@gmail.com", "XX Str, apt 103, Hoboken, NJ", "202-222-2222", "quidditch");
 
 
+
+
     //dish materials selection
-    let vegetable = ['Tomatao', 'Potato', 'Mushroom', 'Eggplant'];
-    let meat = ['Beef', 'Pork', 'Chicken'];
-    let cookingstyle = ['Stew', 'Fry'];
-    let flavor = ['Spicy', 'Mild'];
-    let carbohydrate = ['Rice', 'Noodles'];
-    let drink = ['Soda', 'Milk'];
-    //A total of 192 combinations
-    let Dish = new Array(192);
-    let index = 0;
-    for (let a = 0; a < 4; a++) {
-        for (let b = 0; b < 3; b++) {
-            for (let c = 0; c < 2; c++) {
-                for (let d = 0; d < 2; d++) {
-                    for (let e = 0; e < 2; e++) {
-                        for (let f = 0; f < 2; f++) {
-                            Dish[index] = await dishes.addDish(
-                                vegetable[a],
-                                meat[b],
-                                cookingstyle[c],
-                                flavor[d],
-                                carbohydrate[e],
-                                drink[f],
-                                `${cookingstyle[c]}ed ${flavor[d]} ${meat[b]} with ${vegetable[a]}`
-                            );
-                            index++;
-                        }
-                    }
-                }
-            }
-        }
-    }
+    // let vegetable = ['Tomatao', 'Potato', 'Mushroom', 'Eggplant'];
+    // let meat = ['Beef', 'Pork', 'Chicken'];
+    // let cookingstyle = ['Stew', 'Fry'];
+    // let flavor = ['Spicy', 'Mild'];
+    // let carbohydrate = ['Rice', 'Noodles'];
+    // let drink = ['Soda', 'Milk'];
+    // //A total of 192 combinations
+    // let Dish = new Array(192);
+    // let index = 0;
+    // for (let a = 0; a < 4; a++) {
+    //     for (let b = 0; b < 3; b++) {
+    //         for (let c = 0; c < 2; c++) {
+    //             for (let d = 0; d < 2; d++) {
+    //                 for (let e = 0; e < 2; e++) {
+    //                     for (let f = 0; f < 2; f++) {
+    //                         Dish[index] = await dishes.addDish(
+    //                             vegetable[a],
+    //                             meat[b],
+    //                             cookingstyle[c],
+    //                             flavor[d],
+    //                             carbohydrate[e],
+    //                             drink[f],
+    //                             `${cookingstyle[c]}ed ${flavor[d]} ${meat[b]} with ${vegetable[a]}`
+    //                         );
+    //                         index++;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     //a new finished dish
-    const FinishedDish1 = await finishedDishes.addFinishedDish(
-        Dish[1]._id,
-        User1._id,
-        Dish[1].product,
-        Dish[1].carbohydrate,
-        Dish[1].drink, ["good"]
-    );
+    // const FinishedDish1 = await finishedDishes.addFinishedDish(
+    //     Dish[1]._id,
+    //     User1._id,
+    //     Dish[1].product,
+    //     Dish[1].carbohydrate,
+    //     Dish[1].drink, ["good"]
+    // );
 
     //a new comment
-    const Comment1 = await comments.addComment(
-        User1._id,
-        FinishedDish1._id,
-        "Very dilicious"
-    );
+    // const Comment1 = await comments.addComment(
+    //     User1._id,
+    //     FinishedDish1._id,
+    //     "Very dilicious"
+    // );
 
 
     console.log('Done seeding database');
