@@ -60,12 +60,12 @@ $('#customize-form').submit(async(event) => {
     console.log(drink);
 
     try {
-        console.log(10);
+        console.log(11);
 
         $("#orderModal").modal('hide');
 
         await $.ajax({
-            url: 'http://localhost:3000/menu/hotpot',
+            url: 'http://localhost:3000/menu/customize',
             type: 'POST',
             data: {
                 vegetable: veg,
@@ -77,7 +77,7 @@ $('#customize-form').submit(async(event) => {
             }
         });
 
-        console.log(12);
+        console.log(14);
 
     } catch (error) {
         alert(error['responseJSON']['error']);
