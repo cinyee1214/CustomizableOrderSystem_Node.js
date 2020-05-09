@@ -21,11 +21,11 @@ router.get('/logout', async(req, res) => {
         res.cookie('user', '');
         res.clearCookie('user');
 
-        res.cookie('cos', '');
-        res.clearCookie('cos');
+        // res.cookie('cos', '');
+        // res.clearCookie('cos');
 
-        res.cookie('hotpot', '');
-        res.clearCookie('hotpot');
+        // res.cookie('hotpot', '');
+        // res.clearCookie('hotpot');
 
         req.session.destroy();
 
@@ -36,7 +36,7 @@ router.get('/logout', async(req, res) => {
 });
 
 
-router.post('/', async (req, res) =>{
+router.post('/', async(req, res) => {
 
     const { firstname, lastname, emailid, passwordid, cpasswordid, telnum, address } = req.body;
     if (!emailid || !passwordid || !cpasswordid) {

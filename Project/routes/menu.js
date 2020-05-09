@@ -25,11 +25,11 @@ router.get('/logout', async(req, res) => {
     try {
         res.clearCookie("AuthCookie");
 
-        res.cookie('cos', '');
-        res.clearCookie('cos');
+        // res.cookie('cos', '');
+        // res.clearCookie('cos');
 
-        res.cookie('hotpot', '');
-        res.clearCookie('hotpot');
+        // res.cookie('hotpot', '');
+        // res.clearCookie('hotpot');
 
         res.cookie('user', '');
         res.clearCookie('user');
@@ -68,9 +68,9 @@ router.post('/customize', async(req, res) => {
             return;
         }
 
-        let sessionCostomize = { _id: newDish._id };
+        // let sessionCostomize = { _id: newDish._id };
 
-        res.cookie('cos', JSON.stringify(sessionCostomize));
+        // res.cookie('cos', JSON.stringify(sessionCostomize));
 
         res.status(200).json(newDish);
     } catch (e) {
@@ -152,9 +152,9 @@ router.post('/hotpot', async(req, res) => {
             return;
         }
 
-        let sessionCostomize = { _id: Hotpot._id };
+        // let sessionCostomize = { _id: Hotpot._id };
 
-        res.cookie('hotpot', JSON.stringify(sessionCostomize));
+        // res.cookie('hotpot', JSON.stringify(sessionCostomize));
 
         res.status(200).json(Hotpot);
 
