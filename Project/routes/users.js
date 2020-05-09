@@ -128,30 +128,30 @@ router.patch('/', async(req, res) => {
         return;
     }
 
-    if (password) {
-        let match = await bcrypt.compare(
-            xss(password),
-            xss(user.hashedPassword)
-        );
-
-        if (match) {
-            const error = '401: The password is the same as your former password. No need to update!';
-            res.status(401).json({ error: error });
-            return;
-        }
-    }
-
     try {
         let user = await userData.getUserByID(xss(userId));
 
         console.log("patch_getUserByID: " + JSON.stringify(user));
+
+        if (password) {
+            let match = await bcrypt.compare(
+                xss(password),
+                xss(user.hashedPassword)
+            );
+
+            if (match) {
+                const error = '401: The password is the same as your former password. No need to update!';
+                res.status(401).json({ error: error });
+                return;
+            }
+        }
 
         if (firstname && firstname != user.firstName) {
             updatedObject.firstName = xss(firstname);
         }
 
         if (lastname && lastname != user.lastName) {
-            updatedObject.lastname = xss(lastname);
+            updatedObject.lastName = xss(lastname);
         }
 
         if (email && email != user.Email) {
@@ -189,6 +189,5 @@ router.patch('/', async(req, res) => {
         res.status(500).json({ error: e });
     }
 });
-
 
 module.exports = router;

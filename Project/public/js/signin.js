@@ -40,7 +40,8 @@ $('#signup-form').submit(async(event) => {
         });
 
         $("#signupModal").modal('hide');
-        showWel();
+        $('#signupA').text("Welcome!");
+        $('#signupA').removeAttr('data-toggle');
     } catch (error) {
         alert(error['responseJSON']['error']);
     }
