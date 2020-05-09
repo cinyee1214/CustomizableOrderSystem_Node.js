@@ -97,7 +97,7 @@ module.exports = {
     },
 
     async updateUser(id, firstName, lastName, Email, Address, Contactnumber, hashedPassword) {
-        if (arguments.length < 8) throw "arguments are not enough";
+        if (arguments.length < 7) throw "arguments are not enough";
         if (!id) throw "You must provide an id to search for";
         if (id === undefined) throw "id not defined";
         if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
@@ -128,14 +128,15 @@ module.exports = {
 
         const userCollection = await users();
 
+        const hashedPassword1 = await bcrypt.hash(hashedPassword, saltRounds);
+
         const updatedUser = {
             firstName: firstName,
             lastName: lastName,
             Email: Email,
-
             Address: Address,
             Contactnumber: Contactnumber,
-            hashedPassword: hashedPassword
+            hashedPassword: hashedPassword1
         };
 
         const updatedInfo = await userCollection.updateOne({ _id: id }, { $set: updatedUser });
