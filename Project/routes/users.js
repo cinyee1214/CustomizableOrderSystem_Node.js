@@ -21,6 +21,12 @@ router.get('/logout', async(req, res) => {
         res.cookie('user', '');
         res.clearCookie('user');
 
+        res.cookie('cos', '');
+        res.clearCookie('cos');
+
+        res.cookie('hotpot', '');
+        res.clearCookie('hotpot');
+
         req.session.destroy();
 
         res.render('login/logout', { layout: false });
@@ -29,6 +35,19 @@ router.get('/logout', async(req, res) => {
     }
 });
 
+router.delete('/:id', async(req, res) => {
+    if (!req.params.id) {
+        throw 'You must provide a user_ID to delete.';
+    }
+
+    try {
+        await userData.getUserById(req.params.id);
+        const deletedUser = await userData.removeUser(req.params.id);
+        res.status(200).json(deletedUser);
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
+});
 
 
 module.exports = router;

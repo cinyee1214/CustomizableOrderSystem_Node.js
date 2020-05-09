@@ -25,6 +25,12 @@ router.get('/logout', async(req, res) => {
     try {
         res.clearCookie("AuthCookie");
 
+        res.cookie('cos', '');
+        res.clearCookie('cos');
+
+        res.cookie('hotpot', '');
+        res.clearCookie('hotpot');
+
         res.cookie('user', '');
         res.clearCookie('user');
 

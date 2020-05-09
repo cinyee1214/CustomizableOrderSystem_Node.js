@@ -99,8 +99,6 @@ router.get('/users', async(req, res) => {
     }
 });
 
-
-
 router.get('/about', async(req, res) => {
     res.render('restaurant/aboutus', { layout: false });
 });
