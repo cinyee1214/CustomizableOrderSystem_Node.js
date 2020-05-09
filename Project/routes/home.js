@@ -80,7 +80,6 @@ router.post('/signup', async(req, res) => {
     }
 });
 
-
 router.get('/menu', async(req, res) => {
     if (req.session.AuthCookie) {
         res.render('restaurant/menu', { layout: false });

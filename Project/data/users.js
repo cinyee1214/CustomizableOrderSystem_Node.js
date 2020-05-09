@@ -64,7 +64,7 @@ module.exports = {
 
         const userCollection = await users();
         const usergo = await userCollection.findOne({ _id: id });
-        if (!usergo) throw "No user with that id";
+
         return usergo;
     },
 
@@ -96,56 +96,83 @@ module.exports = {
 
     },
 
-    async updateUser(id, firstName, lastName, Email, Address, Contactnumber, hashedPassword) {
-        if (arguments.length < 7) throw "arguments are not enough";
-        if (!id) throw "You must provide an id to search for";
-        if (id === undefined) throw "id not defined";
-        if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
+    // async updateUser(id, firstName, lastName, Email, Address, Contactnumber, hashedPassword) {
+    //     if (arguments.length < 7) throw "arguments are not enough";
+    //     if (!id) throw "You must provide an id to search for";
+    //     if (id === undefined) throw "id not defined";
+    //     if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
+    //     if (typeof(id) !== "object") {
+    //         id = ObjectId.createFromHexString(id);
+    //     }
+
+    //     if (!firstName) throw "You must provide a first Name";
+    //     if (firstName === undefined) throw "first Name not defined";
+    //     if (typeof firstName !== "string") throw "first Name value is not a string";
+    //     if (!lastName) throw "You must provide a last Name";
+    //     if (lastName === undefined) throw "last Name not defined";
+    //     if (typeof lastName !== "string") throw "last Name value is not a string";
+    //     if (!Email) throw "You must provide a Email";
+    //     if (Email === undefined) throw "Email not defined";
+    //     if (typeof Email !== "string") throw "Email value is not a string";
+
+    //     if (!Address) throw "You must provide Address";
+    //     if (Address === undefined) throw "Address not defined";
+    //     if (typeof Address !== "string") throw "Address value is not a string";
+    //     if (!Contactnumber) throw "You must provide Contact number";
+    //     if (Contactnumber === undefined) throw "Contact number not defined";
+    //     if (typeof Contactnumber !== "string") throw "Contact number value is not a string";
+    //     if (!hashedPassword) throw "You must provide hashedPassword";
+    //     if (hashedPassword === undefined) throw "hashedPassword not defined";
+    //     if (typeof hashedPassword !== "string") throw "hashedPassword value is not a string";
+
+
+    //     const userCollection = await users();
+
+    //     const hashedPassword1 = await bcrypt.hash(hashedPassword, saltRounds);
+
+    //     const updatedUser = {
+    //         firstName: firstName,
+    //         lastName: lastName,
+    //         Email: Email,
+    //         Address: Address,
+    //         Contactnumber: Contactnumber,
+    //         hashedPassword: hashedPassword1
+    //     };
+
+    //     const updatedInfo = await userCollection.updateOne({ _id: id }, { $set: updatedUser });
+    //     if (updatedInfo.modifiedCount === 0) {
+    //         throw "could not update the user successfully";
+    //     }
+
+    //     return await this.getUserByID(id);
+    // }
+
+    async updateUser(id, updatedObject) {
+        if (!id) throw "updateUser: You must provide an id to update";
+        if (typeof(id) !== "string" && typeof(id) !== "object") throw "updateUser: id type must be string or object";
         if (typeof(id) !== "object") {
             id = ObjectId.createFromHexString(id);
         }
 
-        if (!firstName) throw "You must provide a first Name";
-        if (firstName === undefined) throw "first Name not defined";
-        if (typeof firstName !== "string") throw "first Name value is not a string";
-        if (!lastName) throw "You must provide a last Name";
-        if (lastName === undefined) throw "last Name not defined";
-        if (typeof lastName !== "string") throw "last Name value is not a string";
-        if (!Email) throw "You must provide a Email";
-        if (Email === undefined) throw "Email not defined";
-        if (typeof Email !== "string") throw "Email value is not a string";
-
-        if (!Address) throw "You must provide Address";
-        if (Address === undefined) throw "Address not defined";
-        if (typeof Address !== "string") throw "Address value is not a string";
-        if (!Contactnumber) throw "You must provide Contact number";
-        if (Contactnumber === undefined) throw "Contact number not defined";
-        if (typeof Contactnumber !== "string") throw "Contact number value is not a string";
-        if (!hashedPassword) throw "You must provide hashedPassword";
-        if (hashedPassword === undefined) throw "hashedPassword not defined";
-        if (typeof hashedPassword !== "string") throw "hashedPassword value is not a string";
-
-
         const userCollection = await users();
 
-        const hashedPassword1 = await bcrypt.hash(hashedPassword, saltRounds);
+        console.log("updatedObject: " + JSON.stringify(updatedObject));
 
-        const updatedUser = {
-            firstName: firstName,
-            lastName: lastName,
-            Email: Email,
-            Address: Address,
-            Contactnumber: Contactnumber,
-            hashedPassword: hashedPassword1
-        };
+        // const updatedUserData = {};
 
-        const updatedInfo = await userCollection.updateOne({ _id: id }, { $set: updatedUser });
+        // if (updatedObject.firstname) {
+        //     updatedUserData.firstName = updatedObject.firstname;
+        // }
+
+        // console.log("updatedUserData: " + JSON.stringify(updatedUserData));
+
+        const updatedInfo = await userCollection.updateOne({ _id: id }, { $set: updatedObject });
+        console.log(updatedInfo.modifiedCount);
+
         if (updatedInfo.modifiedCount === 0) {
             throw "could not update the user successfully";
         }
 
         return await this.getUserByID(id);
     }
-
-
 };
