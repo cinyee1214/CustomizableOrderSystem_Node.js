@@ -1,6 +1,8 @@
 const userDetails = document.getElementById("userDetails");
 const orderDetails = document.getElementById("orderDetails");
 
+orderDetails.hidden = true;
+
 $('#orderInfo').click(() => {
     // if (!Cookies.get('cos') && !Cookies.get('hotpot')) {
     //     alert('Your order cart is empty!');

@@ -183,6 +183,12 @@ router.patch('/', async(req, res) => {
             updatedObject
         );
 
+        req.session.AuthCookie = updatedUser;
+
+        let sessionUser = { _id: updatedUser._id, email: xss(updatedUser.Email) };
+
+        res.cookie('user', JSON.stringify(sessionUser));
+
         res.status(200).json(updatedUser);
 
     } catch (e) {
