@@ -73,47 +73,47 @@
         </div>
 
         <div class="col-12 col-md-10 offset-1" id="userDetails">
-            <form class="userInfoPage" id="userInfoUpdate">
+            <form method="POST" action="/users" class="userInfoPage" id="userInfoUpdate">
                 <div class="form-group row">
                     <label for="firstname" class="col-md-2 col-form-label">First Name</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name">
+                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" value={{user.firstName}}>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="lastname" class="col-md-2 col-form-label">Last Name</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name">
+                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" value={{user.lastName}}>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="emailid" class="col-md-2 col-form-label">Email</label>
                     <div class="col-md-10">
-                        <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Email">
+                        <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Email" value={{user.Email}}>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="passwordid" class="col-md-2 col-form-label">Password</label>
                     <div class="col-md-10">
-                        <input type="password" class="form-control" id="passwordid" name="passwordid" placeholder="New Password">
+                        <input type="password" class="form-control" id="passwordid" name="passwordid" placeholder="New Password" value={{user.password}}>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="cpasswordid" class="col-md-2 col-form-label">Password</label>
                     <div class="col-md-10">
-                        <input type="password" class="form-control" id="cpasswordid" name="cpasswordid" placeholder="Confirm Your Password">
+                        <input type="password" class="form-control" id="cpasswordid" name="cpasswordid" placeholder="Confirm Your Password" value={{user.password}}>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="telnum" class="col-12 col-md-2 col-form-label">Contact Tel.</label>
                     <div class="col-md-10">
-                        <input type="tel" class="form-control" id="telnum" name="telnum" placeholder="Tel. number">
+                        <input type="tel" class="form-control" id="telnum" name="telnum" placeholder="Tel. number" value={{user.Contactnumber}}>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="address" class="col-12 col-md-2 col-form-label">Address</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" id="address" name="address" placeholder="Please Enter Your Deliver Address." rows="6"></textarea>
+                        <textarea class="form-control" id="address" name="address" placeholder="Please Enter Your Deliver Address." rows="6">{{user.Address}}</textarea>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -126,6 +126,11 @@
 
         <div id="orderDetails">
             <!-- render by js!-->
+            <div class="list-group">
+                <p class="textStyle">product, carbohydrate, drink, comments :</p>
+                <ol id="detail">
+                </ol>
+            </div>
         </div>
     </div>
 
