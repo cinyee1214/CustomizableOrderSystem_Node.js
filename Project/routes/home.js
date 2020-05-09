@@ -92,7 +92,7 @@ router.get('/menu', async(req, res) => {
 
 router.get('/users', async(req, res) => {
     if (req.session.AuthCookie) {
-        res.render('restaurant/userOrder', { layout: false });
+        res.render('restaurant/userOrder', { layout: false, user: req.session.AuthCookie });
         return;
     } else {
         res.render('login/error', { layout: false });
