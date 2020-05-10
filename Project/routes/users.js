@@ -4,8 +4,7 @@ const router = express.Router();
 const xss = require("xss");
 const data = require('../data');
 const userData = data.users;
-const dishData = data.dishes;
-
+const hotpotData=data.hotpots;
 const saltRounds = 5;
 
 router.get('/', async(req, res) => {
@@ -37,6 +36,38 @@ router.get('/logout', async(req, res) => {
         res.status(500).json({ error: e });
     }
 });
+
+
+// router.post('/', async(req, res) => {
+
+//     const { firstname, lastname, emailid, passwordid, cpasswordid, telnum, address } = req.body;
+//     if (!emailid || !passwordid || !cpasswordid) {
+//         const error = "401: you must provide the email and the password!";
+//         res.status(401).json({ error: error });
+//         return;
+//     }
+//     if (passwordid !== cpasswordid) {
+//         const error = "401 : the password and the confirmed password are not the same!";
+//         res.status(401).json({ error: error });
+//         return;
+//     }
+
+
+//     try {
+//         let user = await userData.getUserByEmail(xss(emailid));
+//         if (user !== null && user.Email !== req.session.AuthCookie.Email) {
+//             const error = "401: The user already existed, please signin.";
+//             res.status(401).json({ error: error });
+//             return;
+//         } else {
+//             const updatedUser = await userData.updateUser(req.session.AuthCookie._id, xss(firstname), xss(lastname), xss(emailid), xss(address), xss(telnum), xss(passwordid));
+//             res.status(200).json("update completed!");
+//         }
+//     } catch (e) {
+//         res.status(500).json({ error: e });
+//     }
+// });
+
 
 router.delete('/:id', async(req, res) => {
     if (!req.session.AuthCookie) {
@@ -164,7 +195,38 @@ router.patch('/', async(req, res) => {
         res.status(500).json({ error: e });
     }
 });
-
+router.get('/hotpot',async(req,res)=>{
+    let curuser=req.session.AuthCookie;
+    let HotpotData=await hotpotData();
+    try{
+        let result=await HotpotData.getAllHotPotByUserId(xss(curuser._id));
+        res.status(200).json(result);
+    }catch(e)
+    {
+        res.status(500).json({error:e});
+        return;
+    }
+    
+});
+router.delete('hotpot/:id',async(req,res)=>{
+    if(!req.params.id)
+    {
+        const error="The Hotpot Id is invalid";
+        res.status(401).json({error:error});
+        return;
+    }
+    let ID=req.params.id;
+    try{
+        let HotpotData=await hotpotData();
+        let result=await HotpotData.removeHotpot(ID);
+        res.status(200).json(result);
+    }catch(e)
+    {
+        res.status(500).json({error:e});
+    }
+    
+    
+});
 router.get('/cos', async(req, res) => {
     if (!req.session.AuthCookie) {
         res.render('login/error', { layout: false });
@@ -208,5 +270,4 @@ router.delete('/cos/:id', async(req, res) => {
         res.status(500).json({ error: error });
     }
 });
-
 module.exports = router;
