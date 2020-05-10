@@ -138,3 +138,23 @@ body {
 #orderInfo {
     cursor: pointer;
 }
+
+.center {
+    text-align: center;
+}
+
+.orderCosDiv {
+    position: relative;
+}
+
+.editBtn {
+    position: absolute;
+    top: 0;
+    right: 42px;
+}
+
+.deleteBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

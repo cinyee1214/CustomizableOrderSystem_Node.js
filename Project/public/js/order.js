@@ -159,54 +159,76 @@ const showCos = async() => {
 
         for (let i = 0; i < dishes.length; ++i) {
             const dish = dishes[i];
-            var dishdiv;
 
-            if (dish.drink == "Milk") {
-                dishdiv = $(`
-                <div class="row">
-                    <div class="col-12 col-sm-3">
-                        <img class="d-block img-fluid" src="img/milk.png" alt="milk">
-                    </div>
-                    <div class="dishInfo col-12 col-sm align-self-center">
-                        <p>Order ${i + 1}:</p>
-                        <p>Product: ${dish.product}</p>
-                    </div>
-                </div>
-                <br>`);
-            } else {
-                dishdiv = $(`
-                <div class="row">
-                    <div class="col-12 col-sm-3">
-                    <img class="d-block img-fluid" src="img/soda.png" alt="soda"></img>
-                    </div>
-                    <div class="dishInfo col-12 col-sm align-self-center">
-                        <p>Order ${i + 1}:</p>
-                        <p>Product: ${dish.product}</p>
-                    </div>
-                </div>
-                <br>`);
-            }
-
-            const deleteBtn = $(
-                `<button class="btn" data-id="${dishdiv._id}">
-                    <span class="fa fa-trash-o" aria-hidden="true"></span>
-                </button>`
-            );
-
+            var dishdiv = $(`<br><div class="row orderCosDiv" ></div>`);
+            // style="position: relative;"
             const editBtn = $(
-                `<button class="btn" data-id="${dishdiv._id}">
+                `<button class="btn editBtn btn-default" data-id="${dish._id}" >
                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                 </button>`
             );
+            // style="position: absolute; top: 0; right: 42px;"
+            const deleteBtn = $(
+                `<button type="button" class="btn deleteBtn btn-default" data-id="${dish._id}" >
+                    <span class="fa fa-trash-o" aria-hidden="true"></span>
+                </button>`
+            );
+            // style="position: absolute; top: 0; right: 0;"
+            var imgDiv;
+            if (dish.drink == 'Milk') {
+                imgDiv = $(`
+                    <div class="col-12 col-sm-3 cosImgDiv">
+                        <img class="d-block img-fluid" src="img/milk.png" alt="milk">
+                    </div>`);
+            } else {
+                imgDiv = $(`
+                    <div class="col-12 col-sm-3">
+                    <img class="d-block img-fluid" src="img/soda.png" alt="soda"></img>
+                    </div>`);
+            }
+
+            var infoDiv = $(`<div class="dishInfo col-12 col-sm align-self-center">
+                                <p class="center">Order ${i + 1}</p>
+                                <p>Product: ${dish.cookingStyle} ${dish.meat} with ${dish.vegetable}</p>
+                                <p>Flavor: ${dish.flavor}</p>
+                                <p>Serving with: ${dish.carbohydrate} and ${dish.drink}</p>
+                            </div>`);
+
+
+
+            // if (dish.drink == "Milk") {
+            //     dishdiv = $(`
+            //     <div class="row orderCosDiv">
+            //         <div class="col-12 col-sm-3 cosImgDiv">
+            //             <img class="d-block img-fluid" src="img/milk.png" alt="milk">
+            //         </div>
+            //         <div class="dishInfo col-12 col-sm align-self-center">
+            //             <p>Order ${i + 1}:</p>
+            //             <p>Product: ${dish.product}</p>
+            //         </div>
+            //     </div>
+            //     <br>`);
+            // } else {
+            //     dishdiv = $(`
+            //     <div class="row">
+            //         <div class="col-12 col-sm-3">
+            //         <img class="d-block img-fluid" src="img/soda.png" alt="soda"></img>
+            //         </div>
+            //         <div class="dishInfo col-12 col-sm align-self-center">
+            //             <p>Order ${i + 1}:</p>
+            //             <p>Product: ${dish.product}</p>
+            //         </div>
+            //     </div>
+            //     <br>`);
+            // }
+
+            $(dishdiv).append(imgDiv).append(infoDiv).append(editBtn).append(deleteBtn);
 
             deleteBtn.click();
 
             editBtn.click((event) => {
 
             });
-
-            $(dishdiv).append(deleteBtn)
-                .append(editBtn);
 
             $('#orderCos').append(dishdiv);
         }
