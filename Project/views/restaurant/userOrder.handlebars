@@ -64,8 +64,8 @@
     <div class="container">
         <div class="row">
             <ol class="col-12 breadcrumb">
-                <li id="userInfo" class="breadcrumb-item " data-id="#userDetails">User Info</li>
-                <li id="orderInfo" class="breadcrumb-item active" data-id="#orders">Orders</li>
+                <li id="orderInfo" class="breadcrumb-item" data-id="#orders">Orders</li>
+                <li id="userInfo" class="breadcrumb-item active" data-id="#userDetails">User Info</li>
             </ol>
         </div>
         <div>
@@ -125,12 +125,27 @@
             </form>
         </div>
 
-        <div id="orderDetails">
-            <!-- render by js!-->
-            <div class="list-group">
-                <p class="textStyle">product, carbohydrate, drink, comments :</p>
-                <ol id="detail">
-                </ol>
+        <div id="orderDetails" class="col-12">
+            <div class="card card-body bg-light">
+                <blockquote class="blockquote">
+                    <p class="mb-0">Hot Pot Reservation</p>
+                    <footer class="blockquote-footer"><a href = "/menu">You have no reservations, make a reservation now.</a>
+                    </footer>
+                    <div id="orderHotPot" >
+
+                    </div>
+                </blockquote>
+            </div>
+            <br>
+            <div class="card card-body bg-light">
+                <blockquote class="blockquote">
+                    <p class="mb-0">Customizable Order</p>
+                    <footer class="blockquote-footer"><a href = "/menu">You have no orders, make an order now.</a>
+                    </footer>
+                    <div id="orderCos" >
+
+                    </div>
+                </blockquote>
             </div>
         </div>
     </div>

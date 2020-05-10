@@ -1,7 +1,8 @@
 const userDetails = document.getElementById("userDetails");
 const orderDetails = document.getElementById("orderDetails");
+const id = JSON.parse(Cookies.get('user'))._id;
 
-orderDetails.hidden = true;
+userDetails.hidden = true;
 
 $('#orderInfo').click(() => {
     // if (!Cookies.get('cos') && !Cookies.get('hotpot')) {
@@ -23,8 +24,6 @@ $('#userInfo').click(() => {
 
 $('#userInfoUpdate').submit(async(event) => {
     event.preventDefault();
-
-    const id = JSON.parse(Cookies.get('user'))._id;
 
     console.log(id);
 
@@ -66,3 +65,45 @@ $('#userInfoUpdate').submit(async(event) => {
         alert(error['responseJSON']['error']);
     }
 });
+
+const showHotPot = async() => {
+    try {
+        const hotpots = await $.ajax({
+            url: 'http://localhost:3000/users/hotpot',
+            type: 'GET'
+        });
+
+        $('#orderHotPot').empty();
+
+        for (let i = 0; i < hotpots.length; ++i) {
+            const hotpot = hotpots[i];
+            const $hotpot = $(`
+            <div class="hotpot">
+                <div class="hotpotInfo">
+                    <p>Reservation ${i + 1}:</p>
+                    <p>Number of Guests: ${hotpot.numofGuest}</p>
+                    <p>Section: ${hotpot.section}</p>
+                    <p>Date: ${hotpot.date}</p>
+                </div>
+            </div>`);
+
+            const cancelBtn = $(
+                `<button class="btn btn-sm btn-outline-info" data-id="${hotpot._id}">Cancel</button>`
+            );
+            const editBtn = $(
+                `<button class="btn btn-sm btn-outline-info" data-id="${hotpot._id}">Edit</button>`
+            );
+
+            cancelBtn.click(cancelHotPot);
+
+            editBtn.click((event) => {
+
+            });
+
+        }
+
+
+    } catch (error) {
+        alert(error['responseJSON']['error']);
+    }
+};

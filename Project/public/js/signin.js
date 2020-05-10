@@ -47,11 +47,6 @@ $('#signup-form').submit(async(event) => {
     }
 });
 
-
-// const signupModal = document.getElementById("signupModal");
-// const loginModal = document.getElementById("loginModal");
-
-
 const showEmail = () => {
     if (!Cookies.get('user')) {
         return;
