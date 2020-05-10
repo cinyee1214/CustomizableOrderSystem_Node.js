@@ -79,6 +79,7 @@ const showHotPot = async() => {
             const hotpot = hotpots[i];
             const $hotpot = $(`
             <div class="hotpot">
+                <img class="d-block img-fluid" src="img/uthappizza.png" alt="uthappizza">
                 <div class="hotpotInfo">
                     <p>Reservation ${i + 1}:</p>
                     <p>Number of Guests: ${hotpot.numofGuest}</p>
@@ -89,6 +90,10 @@ const showHotPot = async() => {
 
             const cancelBtn = $(
                 `<button class="btn btn-sm btn-outline-info" data-id="${hotpot._id}">Cancel</button>`
+
+                `<button class="btn btn-danger btn-sm" id="carouselButton">
+                            <span id="carousel-button-icon" class="fa fa-trash" aria-hidden="true"></span>
+                    </button>`
             );
             const editBtn = $(
                 `<button class="btn btn-sm btn-outline-info" data-id="${hotpot._id}">Edit</button>`

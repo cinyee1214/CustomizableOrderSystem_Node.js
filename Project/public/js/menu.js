@@ -5,6 +5,7 @@ $('#reserve-form').submit(async(event) => {
 
     var num = $("input[name='guestNumber']:checked").val();
     console.log(num);
+    console.log(typeof num);
 
     var section = $("input[name='options']:checked").val();
     console.log(section);

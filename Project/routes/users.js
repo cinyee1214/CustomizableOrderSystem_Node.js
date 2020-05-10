@@ -172,8 +172,12 @@ router.get('/cos', async(req, res) => {
     }
 
     try {
-        let UserID=req.session.AuthCookie._id
+        let UserID = req.session.AuthCookie._id;
+        console.log(UserID);
+
         let AllDishes = await dishData.getAllDishesByUserId(UserID);
+        console.log(AllDishes);
+
         res.status(200).json(AllDishes);
     } catch (e) {
         res.status(500).json({ error: e });
@@ -192,10 +196,10 @@ router.delete('/cos/:id', async(req, res) => {
 
     try {
         await dishData.getDish(req.params.id);
-      } catch (e) {
+    } catch (e) {
         res.status(404).json({ error: 'Dish not found' });
         return;
-      }
+    }
 
     try {
         const deletedDish = await dishData.removeDish(req.params.id);
