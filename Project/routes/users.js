@@ -174,7 +174,7 @@ router.get('/cos', async(req, res) => {
     try {
         let UserID=req.session.AuthCookie._id
         let AllDishes = await dishData.getAllDishesByUserId(UserID);
-        res.json(AllDishes);
+        res.status(200).json(AllDishes);
     } catch (e) {
         res.status(500).json({ error: e });
     }
