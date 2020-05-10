@@ -54,7 +54,7 @@ module.exports = {
     },
 
 
-    async getAllDish() {
+    async getAllDishes() {
         const dishCollection = await dishes();
         const allDishes = await dishCollection.find({}).toArray();
         return allDishes;

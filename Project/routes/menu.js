@@ -111,11 +111,13 @@ router.post('/hotpot', async(req, res) => {
     const day = today.getDate();
     const year = today.getFullYear();
 
-    // console.log(month);
-    // console.log(day);
-    // console.log(year);
+    console.log(month);
+    console.log(typeof month);
+    console.log(day);
+    console.log(year);
 
-    // console.log(date[0]);
+    console.log(date[0]);
+    console.log(typeof date[0]);
     // console.log(date[1]);
     // console.log(date[2]);
 
@@ -203,7 +205,6 @@ module.exports = router;
 //     "flavor": "Mild",
 //     "carbohydrate": "Rice",
 //     "drink": "Milk"
-
 // }
 
 // login Json:

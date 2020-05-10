@@ -1,5 +1,8 @@
 const userDetails = document.getElementById("userDetails");
 const orderDetails = document.getElementById("orderDetails");
+const Cosfooter = document.getElementById("Cosfooter");
+const HPfooter = document.getElementById("HPfooter");
+
 const id = JSON.parse(Cookies.get('user'))._id;
 
 userDetails.hidden = true;
@@ -66,45 +69,139 @@ $('#userInfoUpdate').submit(async(event) => {
     }
 });
 
-const showHotPot = async() => {
+// const showHotPot = async() => {
+//     try {
+//         const hotpots = await $.ajax({
+//             url: 'http://localhost:3000/users/hotpot',
+//             type: 'GET'
+//         });
+
+//         if (hotpots.length > 0) {
+//             HPfooter.hidden = true;
+//         }
+
+//         $('#orderHotPot').empty();
+
+//         // $('#orderHotPot').html();
+
+//         for (let i = 0; i < hotpots.length; ++i) {
+//             const hotpot = hotpots[i];
+//             var hotpotdiv;
+//             if (hotpot.numofGuest < 4) {
+//                 hotpotdiv = $(`
+//                 <div class="hotpot">
+//                     <img class="d-block img-fluid" src="img/1-3.png" alt="1-3">
+//                     <div class="hotpotInfo">
+//                         <p>Reservation ${i + 1}:</p>
+//                         <p>Number of Guests: ${hotpot.numofGuest}</p>
+//                         <p>Section: ${hotpot.section}</p>
+//                         <p>Date: ${hotpot.date}</p>
+//                     </div>
+//                 </div>`);
+//             } else {
+//                 hotpotdiv = $(`
+//                 <div class="hotpot">
+//                     <img class="d-block img-fluid" src="img/4-6.png" alt="4-6">
+//                     <div class="hotpotInfo">
+//                         <p>Reservation ${i + 1}:</p>
+//                         <p>Number of Guests: ${hotpot.numofGuest}</p>
+//                         <p>Section: ${hotpot.section}</p>
+//                         <p>Date: ${hotpot.date}</p>
+//                     </div>
+//                 </div>`);
+//             }
+
+//             const deleteBtn = $(
+//                 `<button class="btn btn-sm" data-id="${hotpot._id}">
+//                     <span class="fa fa-trash" aria-hidden="true"></span>
+//                 </button>`
+//             );
+
+//             const editBtn = $(
+//                 `<button class="btn btn-sm data-id="${hotpot._id}">
+//                     <span class="fa-pencil-square-o" aria-hidden="true"></span>
+//                 </button>`
+//             );
+
+//             deleteBtn.click(cancelHotPot);
+
+//             editBtn.click((event) => {
+
+//             });
+
+//             $(hotpotdiv).append(deleteBtn)
+//                 .append(editBtn);
+
+//             $('#orderHotPot').append(hotpotdiv);
+//         }
+
+
+//     } catch (error) {
+//         alert(error['responseJSON']['error']);
+//     }
+// };
+
+
+const showCos = async() => {
     try {
-        const hotpots = await $.ajax({
-            url: 'http://localhost:3000/users/hotpot',
+        const dishes = await $.ajax({
+            url: 'http://localhost:3000/users/cos',
             type: 'GET'
         });
 
-        $('#orderHotPot').empty();
+        console.log(dishes);
 
-        for (let i = 0; i < hotpots.length; ++i) {
-            const hotpot = hotpots[i];
-            const $hotpot = $(`
-            <div class="hotpot">
-                <img class="d-block img-fluid" src="img/uthappizza.png" alt="uthappizza">
-                <div class="hotpotInfo">
-                    <p>Reservation ${i + 1}:</p>
-                    <p>Number of Guests: ${hotpot.numofGuest}</p>
-                    <p>Section: ${hotpot.section}</p>
-                    <p>Date: ${hotpot.date}</p>
-                </div>
-            </div>`);
+        if (dishes.length > 0) {
+            Cosfooter.hidden = true;
+        }
 
-            const cancelBtn = $(
-                `<button class="btn btn-sm btn-outline-info" data-id="${hotpot._id}">Cancel</button>`
+        $('#orderCos').empty();
 
-                `<button class="btn btn-danger btn-sm" id="carouselButton">
-                            <span id="carousel-button-icon" class="fa fa-trash" aria-hidden="true"></span>
-                    </button>`
+        for (let i = 0; i < dishes.length; ++i) {
+            const dish = dishes[i];
+            var dishdiv;
+            if (dish.drink == "Milk") {
+                dishdiv = $(`
+                <div class="dish">
+                    <img class="d-block img-fluid" src="img/milk.png" alt="milk">
+                    <div class="dishInfo">
+                        <p>Order ${i + 1}:</p>
+                        <p>Product: ${dish.product}</p>
+                    </div>
+                </div>`);
+            } else {
+                dishdiv = $(`
+                <div class="dish">
+                    <img class="d-block img-fluid" src="img/soda.png" alt="soda">
+                    <div class="dishInfo">
+                        <p>Order ${i + 1}:</p>
+                        <p>Product: ${dish.product}</p>
+                    </div>
+                </div>`);
+            }
+
+            const deleteBtn = $(
+                `<button class="btn btn-sm" data-id="${dishdiv._id}">
+                    <span class="fa fa-trash-o" aria-hidden="true"></span>
+                </button>`
             );
+
             const editBtn = $(
-                `<button class="btn btn-sm btn-outline-info" data-id="${hotpot._id}">Edit</button>`
+                `<button class="btn btn-sm data-id="${dishdiv._id}">
+                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                </button>`
             );
 
-            cancelBtn.click(cancelHotPot);
+            deleteBtn.click();
 
             editBtn.click((event) => {
 
             });
 
+            $(dishdiv).append(deleteBtn)
+                .append(editBtn);
+
+            $('#orderCos').append(dishdiv);
         }
 
 
@@ -112,3 +209,9 @@ const showHotPot = async() => {
         alert(error['responseJSON']['error']);
     }
 };
+
+const init = async() => {
+    showCos();
+};
+
+init();
