@@ -196,19 +196,18 @@ router.patch('/', async(req, res) => {
     }
 });
 router.get('/hotpot',async(req,res)=>{
-    let curuser=req.session.AuthCookie;
-    let HotpotData=await hotpotData();
+    let curUser=req.session.AuthCookie;
+    console.log(curUser);
     try{
-        let result=await HotpotData.getAllHotPotByUserId(xss(curuser._id));
+        let result=await hotpotData.getAllHotpotByUserId(curUser._id);
         res.status(200).json(result);
     }catch(e)
     {
         res.status(500).json({error:e});
         return;
     }
-    
 });
-router.delete('hotpot/:id',async(req,res)=>{
+router.delete('/hotpot/:id',async(req,res)=>{
     if(!req.params.id)
     {
         const error="The Hotpot Id is invalid";
@@ -268,6 +267,30 @@ router.delete('/cos/:id', async(req, res) => {
         res.status(200).json(deletedDish);
     } catch (error) {
         res.status(500).json({ error: error });
+    }
+});
+router.put("/hotpot/:id",async(req,res)=>{
+    let updatedHotpot=req.body;
+    console.log(req.params.id);
+    if(!req.params.id)
+    {
+        const error="The Hotpot ID cannot be found";
+        res.status(401).json({error:error});
+        return;
+    }
+    try{
+        let UpdateInfo=await hotpotData.updateHotpot(updatedHotpot._id,updatedHotpot.numOfGuest,updatedHotpot.section,updatedHotpot.date);
+        if(UpdateInfo.count==0)
+        {
+            const error="The hotpot cannot be found";
+            res.status(401).json({error:error});
+            return;
+        }
+        else{
+            res.status(200).json(UpdateInfo);
+        }
+    }catch(e){
+        res.status(500).json({error:e});
     }
 });
 module.exports = router;
