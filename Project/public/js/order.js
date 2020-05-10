@@ -174,55 +174,22 @@ const showCos = async() => {
                 </button>`
             );
             // style="position: absolute; top: 0; right: 0;"
-            var imgDiv;
-            if (dish.drink == 'Milk') {
-                imgDiv = $(`
-                    <div class="col-12 col-sm-3 cosImgDiv">
-                        <img class="d-block img-fluid" src="img/milk.png" alt="milk">
-                    </div>`);
-            } else {
-                imgDiv = $(`
-                    <div class="col-12 col-sm-3">
-                    <img class="d-block img-fluid" src="img/soda.png" alt="soda"></img>
-                    </div>`);
-            }
+            var imgProduct = getImageOfProdcut(dish.vegetable, dish.meat);
+            var imgCH = getImageOfCH(dish.carbohydrate);
+            var imgDiv = getImageOfDrink(dish.drink);
 
             var infoDiv = $(`<div class="dishInfo col-12 col-sm align-self-center">
-                                <p class="center">Order ${i + 1}</p>
-                                <p>Product: ${dish.cookingStyle} ${dish.meat} with ${dish.vegetable}</p>
-                                <p>Flavor: ${dish.flavor}</p>
-                                <p>Serving with: ${dish.carbohydrate} and ${dish.drink}</p>
+                                <h5>Order ${i + 1}: ${dish.cookingStyle} ${dish.meat} with ${dish.vegetable}</h5>
+                                <br>
+                                <small>
+                                    <p>Flavor: ${dish.flavor}</p>
+                                    <p>Serving with: ${dish.carbohydrate} and ${dish.drink}</p>
+                                </small>
                             </div>`);
 
 
 
-            // if (dish.drink == "Milk") {
-            //     dishdiv = $(`
-            //     <div class="row orderCosDiv">
-            //         <div class="col-12 col-sm-3 cosImgDiv">
-            //             <img class="d-block img-fluid" src="img/milk.png" alt="milk">
-            //         </div>
-            //         <div class="dishInfo col-12 col-sm align-self-center">
-            //             <p>Order ${i + 1}:</p>
-            //             <p>Product: ${dish.product}</p>
-            //         </div>
-            //     </div>
-            //     <br>`);
-            // } else {
-            //     dishdiv = $(`
-            //     <div class="row">
-            //         <div class="col-12 col-sm-3">
-            //         <img class="d-block img-fluid" src="img/soda.png" alt="soda"></img>
-            //         </div>
-            //         <div class="dishInfo col-12 col-sm align-self-center">
-            //             <p>Order ${i + 1}:</p>
-            //             <p>Product: ${dish.product}</p>
-            //         </div>
-            //     </div>
-            //     <br>`);
-            // }
-
-            $(dishdiv).append(imgDiv).append(infoDiv).append(editBtn).append(deleteBtn);
+            $(dishdiv).append(imgProduct).append(imgCH).append(imgDiv).append(infoDiv).append(editBtn).append(deleteBtn);
 
             deleteBtn.click();
 
@@ -238,8 +205,110 @@ const showCos = async() => {
     }
 };
 
-const init = async() => {
-    showCos();
+const getImageOfProdcut = (veg, meat) => {
+    var imgDiv;
+    if (veg == 'Tomato') {
+        if (meat == 'Beaf') {
+            imgDiv = $(`
+            <div class="col-12 col-sm-2 cosImgDiv">
+                <img class="d-block img-fluid" src="img/tmt_bf.png" alt="tmt_bf"></img>
+            </div>`);
+        } else if (meat == 'Pork') {
+            imgDiv = $(`
+            <div class="col-12 col-sm-2 cosImgDiv">
+                <img class="d-block img-fluid" src="img/tmt_pork.png" alt="tmt_pork"></img>
+            </div>`);
+        } else {
+            imgDiv = $(`
+            <div class="col-12 col-sm-2 cosImgDiv">
+                <img class="d-block img-fluid" src="img/tmt_ch.png" alt="tmt_ch"></img>
+            </div>`);
+        }
+    } else if (veg == 'Potato') {
+        if (meat == 'Beaf') {
+            imgDiv = $(`
+            <div class="col-12 col-sm-2 cosImgDiv">
+                <img class="d-block img-fluid" src="img/ptt_bf.png" alt="ptt_bf"></img>
+            </div>`);
+        } else if (meat == 'Pork') {
+            imgDiv = $(`
+            <div class="col-12 col-sm-2 cosImgDiv">
+                <img class="d-block img-fluid" src="img/ptt_pork.png" alt="ptt_pork"></img>
+            </div>`);
+        } else {
+            imgDiv = $(`
+            <div class="col-12 col-sm-2 cosImgDiv">
+                <img class="d-block img-fluid" src="img/ptt_ch.png" alt="ptt_ch"></img>
+            </div>`);
+        }
+    } else if (veg == 'Mushroom') {
+        if (meat == 'Beaf') {
+            imgDiv = $(`
+            <div class="col-12 col-sm-2 cosImgDiv">
+                <img class="d-block img-fluid" src="img/mr_bf.png" alt="mr_bf"></img>
+            </div>`);
+        } else if (meat == 'Pork') {
+            imgDiv = $(`
+            <div class="col-12 col-sm-2 cosImgDiv">
+                <img class="d-block img-fluid" src="img/mr_pork.png" alt="mr_pork"></img>
+            </div>`);
+        } else {
+            imgDiv = $(`
+            <div class="col-12 col-sm-2 cosImgDiv">
+                <img class="d-block img-fluid" src="img/mr_ch.png" alt="mr_ch"></img>
+            </div>`);
+        }
+    } else {
+        if (meat == 'Beaf') {
+            imgDiv = $(`
+            <div class="col-12 col-sm-2 cosImgDiv">
+                <img class="d-block img-fluid" src="img/eg_bf.png" alt="eg_bf"></img>
+            </div>`);
+        } else if (meat == 'Pork') {
+            imgDiv = $(`
+            <div class="col-12 col-sm-2 cosImgDiv">
+                <img class="d-block img-fluid" src="img/eg_pork.png" alt="eg_pork"></img>
+            </div>`);
+        } else {
+            imgDiv = $(`
+            <div class="col-12 col-sm-2 cosImgDiv">
+                <img class="d-block img-fluid" src="img/eg_ch.png" alt="eg_ch"></img>
+            </div>`);
+        }
+    }
+    return imgDiv;
 };
 
-init();
+const getImageOfCH = (carbohydrate) => {
+    var imgDiv;
+    if (carbohydrate == 'Rice') {
+        imgDiv = $(`
+                    <div class="col-12 col-sm-2 column">
+                        <img class="d-block img-fluid" src="img/rice.png" alt="rice"></img>
+                    </div>`);
+    } else {
+        imgDiv = $(`
+                    <div class="col-12 col-sm-2 column">
+                    <img class="d-block img-fluid" src="img/noodles.png" alt="noodles"></img>
+                    </div>`);
+    }
+    return imgDiv;
+};
+
+const getImageOfDrink = (drink) => {
+    var imgDiv;
+    if (drink == 'Milk') {
+        imgDiv = $(`
+                    <div class="col-12 col-sm-2 column">
+                        <img class="d-block img-fluid" src="img/milk.png" alt="milk"></img>
+                    </div>`);
+    } else {
+        imgDiv = $(`
+                    <div class="col-12 col-sm-2 column">
+                    <img class="d-block img-fluid" src="img/soda.png" alt="soda"></img>
+                    </div>`);
+    }
+    return imgDiv;
+};
+
+showCos();

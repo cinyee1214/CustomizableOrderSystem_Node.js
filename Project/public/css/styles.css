@@ -158,3 +158,20 @@ body {
     top: 0;
     right: 0;
 }
+
+.column {
+    padding: 5px;
+    float: left;
+    border: 15px solid #f1f1f1;
+}
+
+.cosImgDiv {
+    padding: 5px;
+    float: left;
+    border: 5px solid #f1f1f1;
+}
+
+
+/* .titleP {
+    font-weight: bolder;
+} */
