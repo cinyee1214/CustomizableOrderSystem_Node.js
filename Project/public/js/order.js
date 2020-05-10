@@ -160,34 +160,41 @@ const showCos = async() => {
         for (let i = 0; i < dishes.length; ++i) {
             const dish = dishes[i];
             var dishdiv;
+
             if (dish.drink == "Milk") {
                 dishdiv = $(`
-                <div class="dish">
-                    <img class="d-block img-fluid" src="img/milk.png" alt="milk">
-                    <div class="dishInfo">
+                <div class="row">
+                    <div class="col-12 col-sm-3">
+                        <img class="d-block img-fluid" src="img/milk.png" alt="milk">
+                    </div>
+                    <div class="dishInfo col-12 col-sm align-self-center">
                         <p>Order ${i + 1}:</p>
                         <p>Product: ${dish.product}</p>
                     </div>
-                </div>`);
+                </div>
+                <br>`);
             } else {
                 dishdiv = $(`
-                <div class="dish">
-                    <img class="d-block img-fluid" src="img/soda.png" alt="soda">
-                    <div class="dishInfo">
+                <div class="row">
+                    <div class="col-12 col-sm-3">
+                    <img class="d-block img-fluid" src="img/soda.png" alt="soda"></img>
+                    </div>
+                    <div class="dishInfo col-12 col-sm align-self-center">
                         <p>Order ${i + 1}:</p>
                         <p>Product: ${dish.product}</p>
                     </div>
-                </div>`);
+                </div>
+                <br>`);
             }
 
             const deleteBtn = $(
-                `<button class="btn btn-sm" data-id="${dishdiv._id}">
+                `<button class="btn" data-id="${dishdiv._id}">
                     <span class="fa fa-trash-o" aria-hidden="true"></span>
                 </button>`
             );
 
             const editBtn = $(
-                `<button class="btn btn-sm data-id="${dishdiv._id}">
+                `<button class="btn" data-id="${dishdiv._id}">
                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
                 </button>`
             );
@@ -203,7 +210,6 @@ const showCos = async() => {
 
             $('#orderCos').append(dishdiv);
         }
-
 
     } catch (error) {
         alert(error['responseJSON']['error']);
