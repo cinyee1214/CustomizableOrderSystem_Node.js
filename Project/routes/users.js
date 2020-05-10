@@ -4,6 +4,7 @@ const router = express.Router();
 const xss = require("xss");
 const data = require('../data');
 const userData = data.users;
+const dishData = data.dishes;
 
 const saltRounds = 5;
 
@@ -161,6 +162,46 @@ router.patch('/', async(req, res) => {
 
     } catch (e) {
         res.status(500).json({ error: e });
+    }
+});
+
+router.get('/cos', async(req, res) => {
+    if (!req.session.AuthCookie) {
+        res.render('login/error', { layout: false });
+        return;
+    }
+
+    try {
+        let UserID=req.session.AuthCookie._id
+        let AllDishes = await dishData.getAllDishesByUserId(UserID);
+        res.json(AllDishes);
+    } catch (e) {
+        res.status(500).json({ error: e });
+    }
+});
+
+router.delete('/cos/:id', async(req, res) => {
+    if (!req.session.AuthCookie) {
+        res.render('login/error', { layout: false });
+        return;
+    }
+
+    if (!req.params.id) {
+        throw 'You must provide a dish_ID to delete.';
+    }
+
+    try {
+        await dishData.getDish(req.params.id);
+      } catch (e) {
+        res.status(404).json({ error: 'Dish not found' });
+        return;
+      }
+
+    try {
+        const deletedDish = await dishData.removeDish(req.params.id);
+        res.status(200).json(deletedDish);
+    } catch (error) {
+        res.status(500).json({ error: error });
     }
 });
 
