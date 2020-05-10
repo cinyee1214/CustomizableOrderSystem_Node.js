@@ -73,6 +73,19 @@ module.exports = {
         if (dishgo === null) throw "No dish with that id";
         return dishgo;
     },
+    
+    async getAllDishesByUserId(userid) {
+        if (!userid) throw "You must provide an userid to search for";
+        if (typeof(userid) !== "string" && typeof(userid) !== "object") throw "userid type must be string or object";
+        if (typeof(userid) !== "object") {
+            userid = ObjectId.createFromHexString(userid);
+        }
+
+        const AlldishCollection = await dishes();
+        const Alldishgo = await AlldishCollection.find({user_id: userid}).toArray();
+        if (Alldishgo === null) throw "No dish with that userid";
+        return Alldishgo;
+    },
 
     async removeDish(id) {
         if (!id) throw "You must provide an id to search for";
