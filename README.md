@@ -44,7 +44,7 @@ The finished dish collection will store the finished dish based on what user pic
 The comments collection will store the user comments for the finished dish they ordered.
 
 
-# front-end: Bootstrap4, Jquery, CSS
-
+# front-end: Bootstrap4, Jquery, CSS, handlebars
+# back-end: express, mongoDB
 
 
