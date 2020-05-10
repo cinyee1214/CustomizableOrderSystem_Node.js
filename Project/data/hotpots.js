@@ -45,7 +45,21 @@ module.exports = {
         const allHotpot = await HotpotCollection.find({}).toArray();
         return allHotpot;
     },
-
+    async getAllHotpotByUserId(id)
+    {
+        const HotpotCollection=await hotpots();
+        const allHotpot=await HotpotCollection.find({}).toArray();
+        console.log(allHotpot);
+        let result=new Array(0);
+        for(i=0;i<allHotpot.length;++i)
+        {
+            if(allHotpot[i].userId==id)
+            {
+                result.push(allHotpot[i]);
+            }
+        }
+        return result;
+    },
 
     async removeHotpot(id) {
         if (!id) throw "You must provide an Userid to search for";
@@ -77,9 +91,9 @@ module.exports = {
         if (!numofGuest) throw "You have to provide the Guest number";
         if (typeof(numofGuest) !== "string") throw "You have to provide the number of the guest";
         if (!section) throw "You have to provide a section";
-        if (section != "smoked" || section != "unsmoked") throw "you have to provide a valid section";
+        if (section != "smoked" && section != "unsmoked") throw "you have to provide a valid section";
         if (date === undefined) throw "The date is invalid";
-        if (typeof(date) !== "string") throw "The date is not a string";
+        
 
 
         const HotpotCollection = await hotpots();
