@@ -314,4 +314,33 @@ router.put("/hotpot/:id", async(req, res) => {
     }
 });
 
+router.put('/cos/:id', async(req, res) => {
+    if (!req.session.AuthCookie) {
+        res.render('login/error', { layout: false });
+        return;
+    }
+    
+    const { vegetable, meat, cookingStyle, flavor, carbohydrate, drink } = req.body;
+    if (!vegetable || !meat || !cookingStyle || !flavor || !carbohydrate || !drink ) {
+        res.status(400).json({ error: 'You must Supply All fields' });
+        return;
+    }
+
+    try {
+        await dishData.getDish(req.params.id);
+    } catch (e) {
+        res.status(404).json({ error: 'Dish not found' });
+        return;
+    }
+
+    let product = `${cookingStyle} ${flavor} ${meat} with ${vegetable} serving with ${carbohydrate} and ${drink}`;
+    let UserID=req.session.AuthCookie._id;
+    try {
+        const updatedDish = await dishData.updateDish(req.params.id, UserID, vegetable, meat, cookingStyle, flavor, carbohydrate, drink, product);
+        res.json(updatedDish);
+    } catch (e) {
+        res.status(500).json({ error: e });
+    }
+});
+
 module.exports = router;
