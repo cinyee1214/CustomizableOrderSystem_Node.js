@@ -72,7 +72,7 @@ module.exports = {
 
         const userCollection = await users();
 
-        const user = await userCollection.findOne({ Email: email });
+        const user = await userCollection.findOne({ Email: new RegExp(`^${email}$`, 'i') });
 
         return user;
     },

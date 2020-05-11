@@ -13,7 +13,7 @@ async function main() {
     await db.dropDatabase();
 
     //feedback
-    const feedback = await feedbacks.addFeedback("John", "Doe", "1", "81288844", "JDoe@gmail.com", "test feedback");
+    const feedback = await feedbacks.addFeedback("John", "Doe", "1", "81288844", "JDoe@gmail.com", "This is amazing!!!!");
 
     //user
     const User1 = await users.addUser("John", "Doe", "JDoe@gmail.com", "XX Str, apt 101, Hoboken, NJ", "808-888-8888", "elementarymydearwatson");
