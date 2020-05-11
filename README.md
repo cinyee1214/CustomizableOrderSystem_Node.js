@@ -45,8 +45,8 @@ The Feedbacks collection will store the user comments for the finished dish they
 
 
 
-# front-end: Bootstrap4, Jquery, CSS, handlebars
-# back-end: express, mongoDB
+# front-end: Bootstrap4, Jquery, CSS, handlebars, JavaScript, HTML
+# back-end: express, mongoDB, NodeJS
 
 
 
