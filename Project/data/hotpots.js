@@ -4,6 +4,22 @@ const { ObjectId } = require('mongodb');
 
 module.exports = {
     async addHotpot(user_id, numofGuest, section, date) {
+        if (!user_id) throw "You must provide an user id.";
+        if (typeof(user_id) !== "string" && typeof(user_id) !== "object") throw "userid type must be string or object";
+        if (typeof(user_id) === "object") {
+            user_id = user_id.toString();
+        }
+
+        if (!numofGuest) {
+            throw "Please provide the number of guests!";
+        }
+        if (!section) {
+            throw "Please provide the section!";
+        }
+        if (!date || typeof date !== "string") {
+            throw "Please provide a valid date to reserve!";
+        }
+
         const hotpotCollection = await hotpots();
         let newHotpot = {
             userId: user_id,

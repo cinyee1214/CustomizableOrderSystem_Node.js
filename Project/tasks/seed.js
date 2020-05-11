@@ -81,6 +81,7 @@ async function main() {
 
     // Data_dish test
     const dish1 = await dishes.addDish(
+        User2._id,
         "Tomato",
         "pork",
         "stew",

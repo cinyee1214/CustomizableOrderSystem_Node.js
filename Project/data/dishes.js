@@ -8,27 +8,33 @@ module.exports = {
 
     async addDish(user_id, vegetable, meat, cookingStyle, flavor, carbohydrate, drink, product) {
         // if (arguments.length < 7) throw "arguments are not enough";
-        // if (!vegetable) throw "You must provide a vegetable";
-        // if (vegetable === undefined) throw "vegetable not defined";
-        // if (typeof vegetable !== "string") throw "vegetable value is not a string";
-        // if (!meat) throw "You must provide a meat";
-        // if (meat === undefined) throw "meat not defined";
-        // if (typeof meat !== "string") throw "meat value is not a string";
-        // if (!cookingStyle) throw "You must provide a cookingStyle";
-        // if (cookingStyle === undefined) throw "cookingStyle not defined";
-        // if (typeof cookingStyle !== "string") throw "cookingStyle value is not a string";
-        // if (!flavor) throw "You must provide a flavor";
-        // if (flavor === undefined) throw "flavor not defined";
-        // if (typeof flavor !== "string") throw "flavor value is not a string";
-        // if (!carbohydrate) throw "You must provide carbohydrate";
-        // if (carbohydrate === undefined) throw "carbohydrate not defined";
-        // if (typeof carbohydrate !== "string") throw "carbohydrate value is not a string";
-        // if (!drink) throw "You must provide drink";
-        // if (drink === undefined) throw "drink not defined";
-        // if (typeof drink !== "string") throw "drink value is not a string";
-        // if (!product) throw "You must provide product";
-        // if (product === undefined) throw "product not defined";
-        // if (typeof product !== "string") throw "product value is not a string";
+        if (!user_id) throw "You must provide an user id.";
+        if (typeof(user_id) !== "string" && typeof(user_id) !== "object") throw "userid type must be string or object";
+        if (typeof(user_id) === "object") {
+            user_id = user_id.toString();
+        }
+
+        if (!vegetable) throw "You must provide a vegetable";
+        if (vegetable === undefined) throw "vegetable not defined";
+        if (typeof vegetable !== "string") throw "vegetable value is not a string";
+        if (!meat) throw "You must provide a meat";
+        if (meat === undefined) throw "meat not defined";
+        if (typeof meat !== "string") throw "meat value is not a string";
+        if (!cookingStyle) throw "You must provide a cookingStyle";
+        if (cookingStyle === undefined) throw "cookingStyle not defined";
+        if (typeof cookingStyle !== "string") throw "cookingStyle value is not a string";
+        if (!flavor) throw "You must provide a flavor";
+        if (flavor === undefined) throw "flavor not defined";
+        if (typeof flavor !== "string") throw "flavor value is not a string";
+        if (!carbohydrate) throw "You must provide carbohydrate";
+        if (carbohydrate === undefined) throw "carbohydrate not defined";
+        if (typeof carbohydrate !== "string") throw "carbohydrate value is not a string";
+        if (!drink) throw "You must provide drink";
+        if (drink === undefined) throw "drink not defined";
+        if (typeof drink !== "string") throw "drink value is not a string";
+        if (!product) throw "You must provide product";
+        if (product === undefined) throw "product not defined";
+        if (typeof product !== "string") throw "product value is not a string";
 
 
         const dishCollection = await dishes();
@@ -75,8 +81,11 @@ module.exports = {
     },
 
     async getAllDishesByUserId(userid) {
-        // if (!userid) throw "You must provide an userid to search for";
-        // if (typeof(userid) !== "string" && typeof(userid) !== "object") throw "userid type must be string or object";
+        if (!userid) throw "You must provide an userid to search for";
+        if (typeof(userid) !== "string" && typeof(userid) !== "object") throw "userid type must be string or object";
+        if (typeof(userid) === "object") {
+            userid = userid.toString();
+        }
         // if (typeof(userid) !== "object") {
         //     userid = ObjectId.createFromHexString(userid);
         // }
@@ -119,6 +128,11 @@ module.exports = {
             id = ObjectId.createFromHexString(id);
         }
         if (!user_id) throw "You must provide an user_id to search for";
+        if (typeof(user_id) !== "string" && typeof(user_id) !== "object") throw "userid type must be string or object";
+        if (typeof(user_id) === "object") {
+            user_id = user_id.toString();
+        }
+
         if (!vegetable) throw "You must provide a vegetable";
         if (vegetable === undefined) throw "vegetable not defined";
         if (typeof vegetable !== "string") throw "vegetable value is not a string";
