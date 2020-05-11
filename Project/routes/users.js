@@ -325,9 +325,15 @@ router.put("/hotpot/:id", async(req, res) => {
 
     let updatedHotpot = req.body;
     console.log(req.params.id);
+
     if (!req.params.id) {
         const error = "The Hotpot ID cannot be found";
         res.status(401).json({ error: error });
+        return;
+    }
+
+    if (!updatedHotpot.numOfGuest || !updatedHotpot.section || !updatedHotpot.date) {
+        res.status(400).json({ error: 'You must Supply All Fields.' });
         return;
     }
 
@@ -352,8 +358,31 @@ router.put("/hotpot/:id", async(req, res) => {
         res.status(500).json({ error: e });
     }
 
+    if (!updatedHotpot.date || typeof updatedHotpot.date !== "object" || updatedHotpot.date.length != 3) {
+        const error = "Please provide a valid date to reserve!";
+        res.status(401).json({ error: error });
+        return;
+    }
+
+    var today = new Date();
+
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    const year = today.getFullYear();
+
+    console.log(month);
+    console.log(typeof month);
+    console.log(day);
+    console.log(year);
+
+    if (updatedHotpot.date[0] < month || updatedHotpot.date[1] < day || updatedHotpot.date[2] != year) {
+        const error = "Please reserve for today or within two weeks!";
+        res.status(401).json({ error: error });
+        return;
+    }
+
     try {
-        let UpdateInfo = await hotpotData.updateHotpot(updatedHotpot._id, updatedHotpot.numOfGuest, updatedHotpot.section, updatedHotpot.date);
+        let UpdateInfo = await hotpotData.updateHotpot(updatedHotpot._id, xss(updatedHotpot.numOfGuest), xss(updatedHotpot.section), xss(updatedHotpot.date));
         if (UpdateInfo.count == 0) {
             const error = "The hotpot cannot be found";
             res.status(401).json({ error: error });

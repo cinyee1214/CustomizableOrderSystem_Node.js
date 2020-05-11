@@ -175,3 +175,27 @@ body {
     float: left;
     border: 5px solid #f1f1f1;
 }
+
+
+/* .hotpotInfo {
+    border: 5px solid #f1f1f1;
+}
+
+.dishInfo {
+    border: 5px solid #f1f1f1;
+} */
+
+#editHotpotModal .modal-header {
+    /* background-color: #512DA8; */
+    background-color: #512DA8;
+    color: white;
+}
+
+#editHotpotModal .modal-header span {
+    color: white;
+}
+
+#editHotpotModal .modal-body {
+    /* background-color: #D1C4E9; */
+    background-color: #D1C4E9;
+}

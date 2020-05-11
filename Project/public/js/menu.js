@@ -44,10 +44,6 @@ $('#reserve-form').submit(async(event) => {
     }
 });
 
-// if (Cookies.get('hotpot')) {
-//     $('#reserveA').removeAttr('data-toggle');
-// }
-
 $('#orderA').click(async(event) => {
     event.preventDefault();
 

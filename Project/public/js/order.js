@@ -87,7 +87,7 @@ const showHotPot = async() => {
         for (let i = 0; i < hotpots.length; ++i) {
             const hotpot = hotpots[i];
 
-            var hotpotdiv = $(`<br><div class="row orderCosDiv"></div>`);
+            var hotpotdiv = $("<br><div class='row orderCosDiv'></div>");
 
             const editBtn = getEditBtn(hotpot._id);
 
@@ -95,14 +95,16 @@ const showHotPot = async() => {
 
             var imgHotpot = getImageOfHotpot(hotpot.numofGuest);
 
-            console.log(hotpot.numofGuest);
-            console.log(hotpot.section);
-            console.log(hotpot.date);
-            console.log(typeof hotpot.date);
+            // console.log(hotpot.numofGuest);
+            // console.log(hotpot.section);
+            // console.log(hotpot.date);
+            // console.log(typeof hotpot.date);
 
             const date = hotpot.date.split(',');
-            console.log(date);
-            console.log(typeof date);
+            // console.log(date);
+            // console.log(typeof date);
+
+            var spacediv = $("<div class='col-12 col-sm-1 align-self-center'></div>");
 
             var infoDiv = $(`<div class="hotpotInfo col-12 col-sm align-self-center">
                                 <h5>Reservation ${i + 1}:</h5>
@@ -114,15 +116,13 @@ const showHotPot = async() => {
                                 </small>
                             </div>`);
 
-            $(hotpotdiv).append(imgHotpot).append(infoDiv).append(editBtn).append(deleteBtn);
+            $(hotpotdiv).append(imgHotpot).append(spacediv).append(infoDiv).append(editBtn).append(deleteBtn);
 
             $('#orderHotPot').append(hotpotdiv);
 
             deleteBtn.click(deleteHotpot);
 
-            editBtn.click((event) => {
-                alert(event.currentTarget.dataset.id);
-            });
+            editBtn.click(editHotpot);
         }
 
     } catch (error) {
@@ -137,7 +137,7 @@ const showCos = async() => {
             type: 'GET'
         });
 
-        console.log(dishes);
+        // console.log(dishes);
 
         if (dishes.length > 0) {
             Cosfooter.hidden = true;
@@ -146,7 +146,7 @@ const showCos = async() => {
         for (let i = 0; i < dishes.length; ++i) {
             const dish = dishes[i];
 
-            var dishdiv = $(`<br><div class="row orderCosDiv" ></div>`);
+            var dishdiv = $("<br><div class='row orderCosDiv' ></div>");
             // style="position: relative;"
             const editBtn = getEditBtn(dish._id);
             // style="position: absolute; top: 0; right: 42px;"
@@ -159,6 +159,8 @@ const showCos = async() => {
             var imgComb = $(`<div class="col-12 col-sm-1 cosImgDiv"></div>`);
             $(imgComb).append(imgCH).append(imgDiv);
 
+            var spacediv = $("<div class='col-12 col-sm-1 align-self-center'></div>");
+
             var infoDiv = $(`<div class="dishInfo col-12 col-sm align-self-center">
                                 <h5>Order ${i + 1}:  ${dish.cookingStyle} ${dish.meat} with ${dish.vegetable}</h5>
                                 <br>
@@ -170,7 +172,7 @@ const showCos = async() => {
 
 
 
-            $(dishdiv).append(imgProduct).append(imgComb).append(infoDiv).append(editBtn).append(deleteBtn);
+            $(dishdiv).append(imgProduct).append(imgComb).append(spacediv).append(infoDiv).append(editBtn).append(deleteBtn);
 
             $('#orderCos').append(dishdiv);
 
@@ -380,6 +382,64 @@ function ConfirmDelete() {
         return true;
     else
         return false;
+};
+
+const editHotpot = async(event) => {
+    event.preventDefault();
+
+    document.getElementById('reserveDate').valueAsDate = new Date();
+
+    $('#editHotpotModal').modal('show');
+
+    const id = event.currentTarget.dataset.id;
+    console.log(id);
+
+    $('#editHotpot-form').submit(async(event) => {
+        event.preventDefault();
+
+        var num = $("input[name='guestNumber']:checked").val();
+        console.log(num);
+        console.log(typeof num);
+
+        var section = $("input[name='options']:checked").val();
+        console.log(section);
+
+        var date = new Date($('#reserveDate').val());
+        console.log(date);
+
+        const day = date.getDate() + 1;
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        // const dateVal = month + "/" + day + "/" + year;
+        const dateVal = [month, day, year];
+
+        console.log(dateVal);
+        console.log(typeof dateVal);
+
+        try {
+            await $.ajax({
+                url: 'http://localhost:3000/users/hotpot/' + id,
+                type: 'PUT',
+                data: {
+                    _id: id,
+                    numOfGuest: num,
+                    section: section,
+                    date: dateVal
+                }
+            });
+
+            await showHotPot();
+            $('#editHotpotModal').modal('hide');
+
+            window.setTimeout(function() {
+                location.reload();
+            }, 500);
+
+        } catch (error) {
+            alert(error['responseJSON']['error']);
+        }
+
+    });
 };
 
 showHotPot();

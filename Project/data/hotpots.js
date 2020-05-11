@@ -12,6 +12,10 @@ module.exports = {
             date: date
         };
 
+        console.log("in addHotpot: ");
+        console.log(date);
+        console.log(typeof date);
+
         const insertInfo = await hotpotCollection.insertOne(newHotpot);
         if (insertInfo.insertedCount === 0) throw "Could not add Hotpot.";
 
@@ -93,13 +97,11 @@ module.exports = {
         if (typeof(id) !== "object") {
             id = ObjectId.createFromHexString(id);
         }
-        if (!numofGuest) throw "You have to provide the Guest number";
-        if (typeof(numofGuest) !== "string") throw "You have to provide the number of the guest";
-        if (!section) throw "You have to provide a section";
-        if (section != "smoked" && section != "unsmoked") throw "you have to provide a valid section";
-        if (date === undefined) throw "The date is invalid";
-
-
+        // if (!numofGuest) throw "You have to provide the Guest number";
+        // if (typeof(numofGuest) !== "string") throw "You have to provide the number of the guest";
+        // if (!section) throw "You have to provide a section";
+        // if (section != "smoked" && section != "unsmoked") throw "you have to provide a valid section";
+        // if (date === undefined) throw "The date is invalid";
 
         const HotpotCollection = await hotpots();
 
