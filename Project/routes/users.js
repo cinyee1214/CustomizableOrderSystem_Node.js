@@ -18,6 +18,11 @@ router.get('/', async(req, res) => {
 });
 
 router.get('/logout', async(req, res) => {
+    if (!req.session.AuthCookie) {
+        res.render('login/error', { layout: false });
+        return;
+    }
+
     try {
         res.clearCookie("AuthCookie");
 
@@ -216,6 +221,11 @@ router.get('/hotpot', async(req, res) => {
 });
 
 router.delete('/hotpot/:id', async(req, res) => {
+    if (!req.session.AuthCookie) {
+        res.render('login/error', { layout: false });
+        return;
+    }
+
     if (!req.params.id) {
         const error = "The Hotpot Id is invalid";
         res.status(401).json({ error: error });
@@ -278,6 +288,11 @@ router.delete('/cos/:id', async(req, res) => {
 });
 
 router.put("/hotpot/:id", async(req, res) => {
+    if (!req.session.AuthCookie) {
+        res.render('login/error', { layout: false });
+        return;
+    }
+
     let updatedHotpot = req.body;
     console.log(req.params.id);
     if (!req.params.id) {
