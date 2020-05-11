@@ -110,15 +110,15 @@ module.exports = {
 
     },
 
-    async updateDish(id, vegetable, meat, cookingStyle, flavor, carbohydrate, drink, product) {
-        if (arguments.length < 8) throw "arguments are not enough";
+    async updateDish(id, user_id, vegetable, meat, cookingStyle, flavor, carbohydrate, drink, product) {
+        if (arguments.length < 9) throw "arguments are not enough";
         if (!id) throw "You must provide an id to search for";
         if (id === undefined) throw "id not defined";
         if (typeof(id) !== "string" && typeof(id) !== "object") throw "id type must be string or object";
         if (typeof(id) !== "object") {
             id = ObjectId.createFromHexString(id);
         }
-
+        if (!user_id) throw "You must provide an user_id to search for";
         if (!vegetable) throw "You must provide a vegetable";
         if (vegetable === undefined) throw "vegetable not defined";
         if (typeof vegetable !== "string") throw "vegetable value is not a string";
