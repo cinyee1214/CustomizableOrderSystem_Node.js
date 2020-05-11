@@ -99,3 +99,41 @@ $('#orderA').click(async(event) => {
     });
 
 });
+
+const footer = document.getElementById("feedbackFooter");
+
+const showFeedback = async() => {
+    try {
+        const feedbacks = await $.ajax({
+            url: 'http://localhost:3000/menu/feedback',
+            type: 'GET'
+        });
+
+        console.log(feedbacks);
+
+        if (feedbacks.length > 0) {
+            footer.hidden = true;
+        }
+
+        for (let i = 0; i < feedbacks.length; ++i) {
+            const feedback = feedbacks[i];
+
+            var feedbackdiv = $("<br><div class='row orderCosDiv'></div>");
+
+            var infoDiv = $(`<div class="col-12 col-sm align-self-center">
+                                <h5>Customor ${feedback.firstname}: <small>${feedback.feedback}</small></h5>
+                            </div>`);
+
+            $(feedbackdiv).append(infoDiv);
+
+            $('#showFeedbackDiv').append(feedbackdiv);
+
+            console.log("done");
+        }
+
+    } catch (error) {
+        alert(error['responseJSON']['error']);
+    }
+};
+
+showFeedback();

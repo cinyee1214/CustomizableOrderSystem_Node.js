@@ -5,6 +5,7 @@ const xss = require("xss");
 const data = require('../data');
 const MenuData = data.dishes;
 const HotpotData = data.hotpots;
+const feedbackData = data.feedbacks;
 // const finishedMenu = data.finishedDishes;
 
 router.get('/', async(req, res) => {
@@ -164,6 +165,23 @@ router.post('/hotpot', async(req, res) => {
         res.status(500).json({ error: e });
         return;
     }
+});
+
+router.get('/feedback', async(req, res) => {
+    if (!req.session.AuthCookie) {
+        res.render('login/error', { layout: false });
+        return;
+    }
+
+    try {
+
+        let feedbacks = await feedbackData.getAllFeedbacks();
+
+        res.status(200).json(feedbacks);
+    } catch (e) {
+        res.status(500).json({ error: e });
+    }
+
 });
 
 module.exports = router;

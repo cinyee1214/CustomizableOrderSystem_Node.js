@@ -27,5 +27,12 @@ module.exports = {
         const feedbacksgo = await feedbackCollection.findOne({ _id: id });
         if (feedbacksgo === null) throw "No feedback with this id.";
         return feedbacksgo;
+    },
+
+    async getAllFeedbacks() {
+        const feedbackCollection = await feedbacks();
+        const allFeedbacks = await feedbackCollection.find({}).toArray();
+        return allFeedbacks;
     }
+
 }
