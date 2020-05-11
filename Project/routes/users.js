@@ -233,13 +233,12 @@ router.delete('/hotpot/:id', async(req, res) => {
     }
     let ID = req.params.id;
     try {
-        let HotpotData = await hotpotData();
-        let result = await HotpotData.removeHotpot(ID);
+
+        let result = await hotpotData.removeHotpot(ID);
         res.status(200).json(result);
     } catch (e) {
         res.status(500).json({ error: e });
     }
-
 
 });
 

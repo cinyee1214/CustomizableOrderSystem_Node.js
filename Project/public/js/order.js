@@ -89,17 +89,9 @@ const showHotPot = async() => {
 
             var hotpotdiv = $(`<br><div class="row orderCosDiv"></div>`);
 
-            const editBtn = $(
-                `<button class="btn editBtn btn-default" data-id="${hotpot._id}" >
-                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                </button>`
-            );
+            const editBtn = getEditBtn(hotpot._id);
 
-            const deleteBtn = $(
-                `<button type="button" class="btn deleteBtn btn-default" data-id="${hotpot._id}" >
-                    <span class="fa fa-trash-o" aria-hidden="true"></span>
-                </button>`
-            );
+            const deleteBtn = getDeleteBtn(hotpot._id);
 
             var imgHotpot = getImageOfHotpot(hotpot.numofGuest);
 
@@ -126,10 +118,10 @@ const showHotPot = async() => {
 
             $('#orderHotPot').append(hotpotdiv);
 
-            deleteBtn.click();
+            deleteBtn.click(deleteHotpot);
 
             editBtn.click((event) => {
-
+                alert(event.currentTarget.dataset.id);
             });
         }
 
@@ -137,7 +129,6 @@ const showHotPot = async() => {
         alert(error['responseJSON']['error']);
     }
 };
-
 
 const showCos = async() => {
     try {
@@ -157,17 +148,9 @@ const showCos = async() => {
 
             var dishdiv = $(`<br><div class="row orderCosDiv" ></div>`);
             // style="position: relative;"
-            const editBtn = $(
-                `<button class="btn editBtn btn-default" data-id="${dish._id}" >
-                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                </button>`
-            );
+            const editBtn = getEditBtn(dish._id);
             // style="position: absolute; top: 0; right: 42px;"
-            const deleteBtn = $(
-                `<button type="button" class="btn deleteBtn btn-default" data-id="${dish._id}" >
-                    <span class="fa fa-trash-o" aria-hidden="true"></span>
-                </button>`
-            );
+            const deleteBtn = getDeleteBtn(dish._id);
             // style="position: absolute; top: 0; right: 0;"
             var imgProduct = getImageOfProdcut(dish.vegetable, dish.meat);
             var imgCH = getImageOfCH(dish.carbohydrate);
@@ -189,18 +172,36 @@ const showCos = async() => {
 
             $(dishdiv).append(imgProduct).append(imgComb).append(infoDiv).append(editBtn).append(deleteBtn);
 
-            deleteBtn.click();
+            $('#orderCos').append(dishdiv);
+
+            deleteBtn.click(deleteCos);
 
             editBtn.click((event) => {
 
             });
-
-            $('#orderCos').append(dishdiv);
         }
 
     } catch (error) {
         alert(error['responseJSON']['error']);
     }
+};
+
+const getEditBtn = (id) => {
+    var btn = $(
+        `<button class="btn editBtn btn-default" data-id="${id}" >
+            <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+        </button>`
+    );
+    return btn;
+};
+
+const getDeleteBtn = (id) => {
+    var btn = $(
+        `<button type="button" class="btn deleteBtn btn-default" data-id="${id}">
+            <span class="fa fa-trash-o" aria-hidden="true"></span>
+        </button>`
+    );
+    return btn;
 };
 
 const getImageOfProdcut = (veg, meat) => {
@@ -323,6 +324,62 @@ const getImageOfHotpot = (num) => {
         </div>`);
     }
     return imgdiv;
+};
+
+const deleteHotpot = async(event) => {
+    event.preventDefault();
+
+    if (!ConfirmDelete()) {
+        return;
+    }
+
+    try {
+        const id = event.currentTarget.dataset.id;
+        await $.ajax({
+            url: 'http://localhost:3000/users/hotpot/' + id,
+            type: 'DELETE'
+        });
+
+        window.setTimeout(function() {
+            location.reload();
+        }, 500);
+
+    } catch (error) {
+        alert(error['responseJSON']['error']);
+    }
+
+};
+
+const deleteCos = async(event) => {
+    event.preventDefault();
+
+    if (!ConfirmDelete()) {
+        return;
+    }
+
+    try {
+        const id = event.currentTarget.dataset.id;
+        await $.ajax({
+            url: 'http://localhost:3000/users/cos/' + id,
+            type: 'DELETE'
+        });
+
+        window.setTimeout(function() {
+            location.reload();
+        }, 500);
+
+    } catch (error) {
+        alert(error['responseJSON']['error']);
+    }
+
+};
+
+function ConfirmDelete() {
+    var x = confirm("Are you sure you want to delete this item?");
+    if (x)
+        return true;
+    else
+        return false;
 };
 
 showHotPot();
