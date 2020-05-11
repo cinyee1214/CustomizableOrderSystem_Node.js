@@ -199,3 +199,18 @@ body {
     /* background-color: #D1C4E9; */
     background-color: #D1C4E9;
 }
+
+#editCosModal .modal-header {
+    /* background-color: #512DA8; */
+    background-color: #512DA8;
+    color: white;
+}
+
+#editCosModal .modal-header span {
+    color: white;
+}
+
+#editCosModal .modal-body {
+    /* background-color: #D1C4E9; */
+    background-color: #D1C4E9;
+}

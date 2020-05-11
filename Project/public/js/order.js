@@ -156,7 +156,7 @@ const showCos = async() => {
             var imgCH = getImageOfCH(dish.carbohydrate);
             var imgDiv = getImageOfDrink(dish.drink);
 
-            var imgComb = $(`<div class="col-12 col-sm-1 cosImgDiv"></div>`);
+            var imgComb = $("<div class='col-12 col-sm-1 cosImgDiv'></div>");
             $(imgComb).append(imgCH).append(imgDiv);
 
             var spacediv = $("<div class='col-12 col-sm-1 align-self-center'></div>");
@@ -178,9 +178,7 @@ const showCos = async() => {
 
             deleteBtn.click(deleteCos);
 
-            editBtn.click((event) => {
-
-            });
+            editBtn.click(editCos);
         }
 
     } catch (error) {
@@ -416,6 +414,11 @@ const editHotpot = async(event) => {
         console.log(dateVal);
         console.log(typeof dateVal);
 
+        if (!num || !section || !date) {
+            alert("Please provide all the reservation information!");
+            return;
+        }
+
         try {
             await $.ajax({
                 url: 'http://localhost:3000/users/hotpot/' + id,
@@ -439,6 +442,69 @@ const editHotpot = async(event) => {
             alert(error['responseJSON']['error']);
         }
 
+    });
+};
+
+const editCos = async(event) => {
+    event.preventDefault();
+
+    $('#editCosModal').modal('show');
+
+    const id = event.currentTarget.dataset.id;
+    console.log(id);
+
+    $('#editCos-form').submit(async(event) => {
+        event.preventDefault();
+
+        var veg = $("input[name='vegeNumber']:checked").val();
+        console.log(veg);
+
+        var meat = $("input[name='meatNumber']:checked").val();
+        console.log(meat);
+
+        var cookingstyle = $("input[name='cookingStyleNumber']:checked").val();
+        console.log(cookingstyle);
+
+        var flavor = $("input[name='FlavorNumber']:checked").val();
+        console.log(flavor);
+
+        var carbohydrate = $("input[name='carbohydrateNumber']:checked").val();
+        console.log(carbohydrate);
+
+        var drink = $("input[name='drinkNumber']:checked").val();
+        console.log(drink);
+
+        if (!veg || !meat || !cookingstyle || !flavor || !carbohydrate || !drink) {
+
+            alert("Please select one kind of each ingredient!");
+            return;
+        }
+
+        try {
+            await $.ajax({
+                url: 'http://localhost:3000/users/cos/' + id,
+                type: 'PUT',
+                data: {
+                    vegetable: veg,
+                    meat: meat,
+                    cookingStyle: cookingstyle,
+                    flavor: flavor,
+                    carbohydrate: carbohydrate,
+                    drink: drink
+                }
+            });
+
+            console.log(14);
+            $('#editCosModal').modal('hide');
+            await showCos();
+
+            window.setTimeout(function() {
+                location.reload();
+            }, 500);
+
+        } catch (error) {
+            alert(error['responseJSON']['error']);
+        }
     });
 };
 
