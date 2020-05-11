@@ -169,37 +169,10 @@ router.post('/hotpot', async(req, res) => {
 module.exports = router;
 
 
-// router.post("/FDishes", async(req, res) => {
-//     const { UserID, DishID, product, carbohydrate, drink, comments } = req.body;
-//     if (!UserID || !DishID || !product || !carbohydrate || !drink || !comments) {
-//         const error = "the final dishes cannot be served";
-//         res.status(401).json({ error: error });
-//         return;
-//     }
-//     try {
-//         let newFinishedDishes = finishedMenu.addFinishedDish(UserID, dishID, product, carbohydrate, drink, comments);
-//         if (newFinishedDishes == null || newFinishedDishes === undefined) {
-//             const error = "the finished dishes cannot be served";
-//             res.status(401).json({ error: error });
-//             return;
-//         } else {
-//             res.status(200).json(newFinishedDishes);
-//             return;
-//         }
-//     } catch (e) {
-//         res.status(500).json({ error: e });
-//         return;
-//     }
-// });
-
-
-
-
-
 // test Json:
 // post: http://localhost:3000/menu/customize
 // {
-// 	"vegetable": "Tomatao",
+// 	"vegetable": "Tomato",
 //      "meat": "Pork",
 //     "cookingstyle": "Stew",
 //     "flavor": "Mild",

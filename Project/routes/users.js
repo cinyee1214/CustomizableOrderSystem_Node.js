@@ -43,38 +43,7 @@ router.get('/logout', async(req, res) => {
     }
 });
 
-
-// router.post('/', async(req, res) => {
-
-//     const { firstname, lastname, emailid, passwordid, cpasswordid, telnum, address } = req.body;
-//     if (!emailid || !passwordid || !cpasswordid) {
-//         const error = "401: you must provide the email and the password!";
-//         res.status(401).json({ error: error });
-//         return;
-//     }
-//     if (passwordid !== cpasswordid) {
-//         const error = "401 : the password and the confirmed password are not the same!";
-//         res.status(401).json({ error: error });
-//         return;
-//     }
-
-
-//     try {
-//         let user = await userData.getUserByEmail(xss(emailid));
-//         if (user !== null && user.Email !== req.session.AuthCookie.Email) {
-//             const error = "401: The user already existed, please signin.";
-//             res.status(401).json({ error: error });
-//             return;
-//         } else {
-//             const updatedUser = await userData.updateUser(req.session.AuthCookie._id, xss(firstname), xss(lastname), xss(emailid), xss(address), xss(telnum), xss(passwordid));
-//             res.status(200).json("update completed!");
-//         }
-//     } catch (e) {
-//         res.status(500).json({ error: e });
-//     }
-// });
-
-
+// delete user
 router.delete('/:id', async(req, res) => {
     if (!req.session.AuthCookie) {
         res.render('login/error', { layout: false });
@@ -82,7 +51,15 @@ router.delete('/:id', async(req, res) => {
     }
 
     if (!req.params.id) {
-        throw 'You must provide a user_ID to delete.';
+        const error = "You must provide the user id.";
+        res.status(401).json({ error: error });
+        return;
+    }
+
+    if (req.session.AuthCookie._id != req.params.id) {
+        const error = "You cannot delete this user.";
+        res.status(401).json({ error: error });
+        return;
     }
 
     try {
@@ -94,6 +71,7 @@ router.delete('/:id', async(req, res) => {
     }
 });
 
+// update user info
 router.patch('/', async(req, res) => {
     if (!req.session.AuthCookie) {
         res.render('login/error', { layout: false });
@@ -106,6 +84,12 @@ router.patch('/', async(req, res) => {
 
     if (!userId) {
         const error = "401: You must provide a userId to update!";
+        res.status(401).json({ error: error });
+        return;
+    }
+
+    if (req.session.AuthCookie._id != userId) {
+        const error = "You cannot update this user info.";
         res.status(401).json({ error: error });
         return;
     }
@@ -202,6 +186,7 @@ router.patch('/', async(req, res) => {
     }
 });
 
+// get all hotpots belong to this cur user
 router.get('/hotpot', async(req, res) => {
     if (!req.session.AuthCookie) {
         res.render('login/error', { layout: false });
@@ -220,6 +205,7 @@ router.get('/hotpot', async(req, res) => {
     }
 });
 
+// delete hotpot with hotpotID
 router.delete('/hotpot/:id', async(req, res) => {
     if (!req.session.AuthCookie) {
         res.render('login/error', { layout: false });
@@ -231,6 +217,28 @@ router.delete('/hotpot/:id', async(req, res) => {
         res.status(401).json({ error: error });
         return;
     }
+
+    try {
+        let AllHotpotsOfUser = await hotpotData.getAllHotpotByUserId(req.session.AuthCookie._id);
+        let findDish = false;
+
+        for (let i = 0; i < AllHotpotsOfUser.length; ++i) {
+
+            if (AllHotpotsOfUser[i]._id == req.params.id) {
+
+                findDish = true;
+                break;
+            }
+        }
+        if (!findDish) {
+            res.status(401).json({ error: 'You cannot delete this hotpot!' });
+            return;
+        }
+
+    } catch (e) {
+        res.status(500).json({ error: e });
+    }
+
     let ID = req.params.id;
     try {
 
@@ -242,6 +250,7 @@ router.delete('/hotpot/:id', async(req, res) => {
 
 });
 
+// get all dishes belong to this cur user
 router.get('/cos', async(req, res) => {
     if (!req.session.AuthCookie) {
         res.render('login/error', { layout: false });
@@ -261,6 +270,7 @@ router.get('/cos', async(req, res) => {
     }
 });
 
+// delete dish with cosID
 router.delete('/cos/:id', async(req, res) => {
     if (!req.session.AuthCookie) {
         res.render('login/error', { layout: false });
@@ -279,6 +289,26 @@ router.delete('/cos/:id', async(req, res) => {
     }
 
     try {
+        let AllDishesOfUser = await dishData.getAllDishesByUserId(req.session.AuthCookie._id);
+        let findDish = false;
+
+        for (let i = 0; i < AllDishesOfUser.length; ++i) {
+
+            if (AllDishesOfUser[i]._id == req.params.id) {
+                findDish = true;
+
+                break;
+            }
+        }
+        if (!findDish) {
+            res.status(401).json({ error: 'You cannot delete this dish!' });
+            return;
+        }
+    } catch (e) {
+        res.status(500).json({ error: e });
+    }
+
+    try {
         const deletedDish = await dishData.removeDish(req.params.id);
         res.status(200).json(deletedDish);
     } catch (error) {
@@ -286,6 +316,7 @@ router.delete('/cos/:id', async(req, res) => {
     }
 });
 
+// update hotpot with hotpotID
 router.put("/hotpot/:id", async(req, res) => {
     if (!req.session.AuthCookie) {
         res.render('login/error', { layout: false });
@@ -299,6 +330,28 @@ router.put("/hotpot/:id", async(req, res) => {
         res.status(401).json({ error: error });
         return;
     }
+
+    try {
+        let AllHotpotsOfUser = await hotpotData.getAllHotpotByUserId(req.session.AuthCookie._id);
+        let findDish = false;
+
+        for (let i = 0; i < AllHotpotsOfUser.length; ++i) {
+
+            if (AllHotpotsOfUser[i]._id == req.params.id) {
+
+                findDish = true;
+                break;
+            }
+        }
+        if (!findDish) {
+            res.status(401).json({ error: 'You cannot update this hotpot!' });
+            return;
+        }
+
+    } catch (e) {
+        res.status(500).json({ error: e });
+    }
+
     try {
         let UpdateInfo = await hotpotData.updateHotpot(updatedHotpot._id, updatedHotpot.numOfGuest, updatedHotpot.section, updatedHotpot.date);
         if (UpdateInfo.count == 0) {
@@ -313,15 +366,22 @@ router.put("/hotpot/:id", async(req, res) => {
     }
 });
 
+// update dish with cosID
 router.put('/cos/:id', async(req, res) => {
     if (!req.session.AuthCookie) {
         res.render('login/error', { layout: false });
         return;
     }
-    
+
     const { vegetable, meat, cookingStyle, flavor, carbohydrate, drink } = req.body;
-    if (!vegetable || !meat || !cookingStyle || !flavor || !carbohydrate || !drink ) {
+    if (!vegetable || !meat || !cookingStyle || !flavor || !carbohydrate || !drink) {
         res.status(400).json({ error: 'You must Supply All fields' });
+        return;
+    }
+
+    if (!req.params.id) {
+        const error = "You must provide the dish id.";
+        res.status(401).json({ error: error });
         return;
     }
 
@@ -333,9 +393,48 @@ router.put('/cos/:id', async(req, res) => {
     }
 
     let product = `${cookingStyle} ${flavor} ${meat} with ${vegetable} serving with ${carbohydrate} and ${drink}`;
-    let UserID=req.session.AuthCookie._id;
+    let UserID = req.session.AuthCookie._id;
+
+    console.log(req.params.id);
+
     try {
-        const updatedDish = await dishData.updateDish(req.params.id, UserID, vegetable, meat, cookingStyle, flavor, carbohydrate, drink, product);
+        let AllDishesOfUser = await dishData.getAllDishesByUserId(UserID);
+        let findDish = false;
+
+        console.log(AllDishesOfUser);
+        console.log(AllDishesOfUser.length);
+        console.log(typeof AllDishesOfUser);
+
+        for (let i = 0; i < AllDishesOfUser.length; ++i) {
+            console.log(req.params.id);
+            console.log(AllDishesOfUser[i]._id);
+            console.log(typeof AllDishesOfUser[i]._id);
+
+            if (AllDishesOfUser[i]._id == req.params.id) {
+
+                console.log(req.params.id);
+                console.log(AllDishesOfUser[i].user_id);
+
+                findDish = true;
+                console.log(findDish);
+
+                break;
+            }
+        }
+
+        console.log(findDish);
+        if (!findDish) {
+            res.status(401).json({ error: 'You cannot update this dish!' });
+            return;
+        }
+
+    } catch (e) {
+        res.status(500).json({ error: e });
+    }
+
+
+    try {
+        const updatedDish = await dishData.updateDish(req.params.id, UserID, xss(vegetable), xss(meat), xss(cookingStyle), xss(flavor), xss(carbohydrate), xss(drink), product);
         res.json(updatedDish);
     } catch (e) {
         res.status(500).json({ error: e });
