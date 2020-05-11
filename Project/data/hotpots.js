@@ -26,6 +26,7 @@ module.exports = {
         return Hotpot;
 
     },
+
     async getHotpot(id) {
         console.log(3);
 
@@ -40,25 +41,29 @@ module.exports = {
         if (reserveHotpot === null) throw "No hotpot with that id";
         return reserveHotpot;
     },
+
     async getAllHotpot() {
         const HotpotCollection = await hotpots();
         const allHotpot = await HotpotCollection.find({}).toArray();
         return allHotpot;
     },
-    async getAllHotpotByUserId(id)
-    {
-        const HotpotCollection=await hotpots();
-        const allHotpot=await HotpotCollection.find({}).toArray();
+
+    async getAllHotpotByUserId(id) {
+        const HotpotCollection = await hotpots();
+        const allHotpot = await HotpotCollection.find({ userId: id }).toArray();
+
         console.log(allHotpot);
-        let result=new Array(0);
-        for(i=0;i<allHotpot.length;++i)
-        {
-            if(allHotpot[i].userId==id)
-            {
-                result.push(allHotpot[i]);
-            }
-        }
-        return result;
+
+        return allHotpot;
+
+        // console.log(allHotpot);
+        // let result = new Array(0);
+        // for (i = 0; i < allHotpot.length; ++i) {
+        //     if (allHotpot[i].userId == id) {
+        //         result.push(allHotpot[i]);
+        //     }
+        // }
+        // return result;
     },
 
     async removeHotpot(id) {
@@ -93,7 +98,7 @@ module.exports = {
         if (!section) throw "You have to provide a section";
         if (section != "smoked" && section != "unsmoked") throw "you have to provide a valid section";
         if (date === undefined) throw "The date is invalid";
-        
+
 
 
         const HotpotCollection = await hotpots();

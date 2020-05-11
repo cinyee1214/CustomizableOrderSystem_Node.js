@@ -196,10 +196,17 @@ router.patch('/', async(req, res) => {
         res.status(500).json({ error: e });
     }
 });
+
 router.get('/hotpot', async(req, res) => {
-    let curUser = req.session.AuthCookie;
-    console.log(curUser);
+    if (!req.session.AuthCookie) {
+        res.render('login/error', { layout: false });
+        return;
+    }
+
     try {
+        let curUser = req.session.AuthCookie;
+        console.log(curUser);
+
         let result = await hotpotData.getAllHotpotByUserId(curUser._id);
         res.status(200).json(result);
     } catch (e) {
@@ -207,6 +214,7 @@ router.get('/hotpot', async(req, res) => {
         return;
     }
 });
+
 router.delete('/hotpot/:id', async(req, res) => {
     if (!req.params.id) {
         const error = "The Hotpot Id is invalid";
@@ -224,6 +232,7 @@ router.delete('/hotpot/:id', async(req, res) => {
 
 
 });
+
 router.get('/cos', async(req, res) => {
     if (!req.session.AuthCookie) {
         res.render('login/error', { layout: false });
@@ -267,6 +276,7 @@ router.delete('/cos/:id', async(req, res) => {
         res.status(500).json({ error: error });
     }
 });
+
 router.put("/hotpot/:id", async(req, res) => {
     let updatedHotpot = req.body;
     console.log(req.params.id);
@@ -288,4 +298,5 @@ router.put("/hotpot/:id", async(req, res) => {
         res.status(500).json({ error: e });
     }
 });
+
 module.exports = router;

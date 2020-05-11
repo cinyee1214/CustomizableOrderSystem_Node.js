@@ -151,18 +151,23 @@ body {
     position: absolute;
     top: 0;
     right: 42px;
+    background-color: #e7e7e7;
+    color: black;
 }
 
 .deleteBtn {
     position: absolute;
     top: 0;
     right: 0;
+    background-color: #e7e7e7;
+    color: black;
 }
 
 .column {
+    top: 15px;
     padding: 5px;
     float: left;
-    border: 15px solid #f1f1f1;
+    border: 3px solid #f1f1f1;
 }
 
 .cosImgDiv {
@@ -170,8 +175,3 @@ body {
     float: left;
     border: 5px solid #f1f1f1;
 }
-
-
-/* .titleP {
-    font-weight: bolder;
-} */

@@ -69,77 +69,74 @@ $('#userInfoUpdate').submit(async(event) => {
     }
 });
 
-// const showHotPot = async() => {
-//     try {
-//         const hotpots = await $.ajax({
-//             url: 'http://localhost:3000/users/hotpot',
-//             type: 'GET'
-//         });
+const showHotPot = async() => {
+    try {
+        const hotpots = await $.ajax({
+            url: 'http://localhost:3000/users/hotpot',
+            type: 'GET'
+        });
 
-//         if (hotpots.length > 0) {
-//             HPfooter.hidden = true;
-//         }
+        if (hotpots.length > 0) {
+            HPfooter.hidden = true;
+        }
 
-//         $('#orderHotPot').empty();
+        console.log(hotpots);
 
-//         // $('#orderHotPot').html();
+        // $('#orderHotPot').html();
 
-//         for (let i = 0; i < hotpots.length; ++i) {
-//             const hotpot = hotpots[i];
-//             var hotpotdiv;
-//             if (hotpot.numofGuest < 4) {
-//                 hotpotdiv = $(`
-//                 <div class="hotpot">
-//                     <img class="d-block img-fluid" src="img/1-3.png" alt="1-3">
-//                     <div class="hotpotInfo">
-//                         <p>Reservation ${i + 1}:</p>
-//                         <p>Number of Guests: ${hotpot.numofGuest}</p>
-//                         <p>Section: ${hotpot.section}</p>
-//                         <p>Date: ${hotpot.date}</p>
-//                     </div>
-//                 </div>`);
-//             } else {
-//                 hotpotdiv = $(`
-//                 <div class="hotpot">
-//                     <img class="d-block img-fluid" src="img/4-6.png" alt="4-6">
-//                     <div class="hotpotInfo">
-//                         <p>Reservation ${i + 1}:</p>
-//                         <p>Number of Guests: ${hotpot.numofGuest}</p>
-//                         <p>Section: ${hotpot.section}</p>
-//                         <p>Date: ${hotpot.date}</p>
-//                     </div>
-//                 </div>`);
-//             }
+        for (let i = 0; i < hotpots.length; ++i) {
+            const hotpot = hotpots[i];
 
-//             const deleteBtn = $(
-//                 `<button class="btn btn-sm" data-id="${hotpot._id}">
-//                     <span class="fa fa-trash" aria-hidden="true"></span>
-//                 </button>`
-//             );
+            var hotpotdiv = $(`<br><div class="row orderCosDiv"></div>`);
 
-//             const editBtn = $(
-//                 `<button class="btn btn-sm data-id="${hotpot._id}">
-//                     <span class="fa-pencil-square-o" aria-hidden="true"></span>
-//                 </button>`
-//             );
+            const editBtn = $(
+                `<button class="btn editBtn btn-default" data-id="${hotpot._id}" >
+                    <span class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                </button>`
+            );
 
-//             deleteBtn.click(cancelHotPot);
+            const deleteBtn = $(
+                `<button type="button" class="btn deleteBtn btn-default" data-id="${hotpot._id}" >
+                    <span class="fa fa-trash-o" aria-hidden="true"></span>
+                </button>`
+            );
 
-//             editBtn.click((event) => {
+            var imgHotpot = getImageOfHotpot(hotpot.numofGuest);
 
-//             });
+            console.log(hotpot.numofGuest);
+            console.log(hotpot.section);
+            console.log(hotpot.date);
+            console.log(typeof hotpot.date);
 
-//             $(hotpotdiv).append(deleteBtn)
-//                 .append(editBtn);
+            const date = hotpot.date.split(',');
+            console.log(date);
+            console.log(typeof date);
 
-//             $('#orderHotPot').append(hotpotdiv);
-//         }
+            var infoDiv = $(`<div class="hotpotInfo col-12 col-sm align-self-center">
+                                <h5>Reservation ${i + 1}:</h5>
+                                <br>
+                                <small>
+                                    <p>Number of Guests: ${hotpot.numofGuest}</p>
+                                    <p>Section: ${hotpot.section}</p>
+                                    <p>Date: ${date[0]}/${date[1]}/${date[2]}</p>
+                                </small>
+                            </div>`);
 
+            $(hotpotdiv).append(imgHotpot).append(infoDiv).append(editBtn).append(deleteBtn);
 
-//     } catch (error) {
-//         alert(error['responseJSON']['error']);
-//     }
-// };
+            $('#orderHotPot').append(hotpotdiv);
+
+            deleteBtn.click();
+
+            editBtn.click((event) => {
+
+            });
+        }
+
+    } catch (error) {
+        alert(error['responseJSON']['error']);
+    }
+};
 
 
 const showCos = async() => {
@@ -154,8 +151,6 @@ const showCos = async() => {
         if (dishes.length > 0) {
             Cosfooter.hidden = true;
         }
-
-        $('#orderCos').empty();
 
         for (let i = 0; i < dishes.length; ++i) {
             const dish = dishes[i];
@@ -178,8 +173,11 @@ const showCos = async() => {
             var imgCH = getImageOfCH(dish.carbohydrate);
             var imgDiv = getImageOfDrink(dish.drink);
 
+            var imgComb = $(`<div class="col-12 col-sm-1 cosImgDiv"></div>`);
+            $(imgComb).append(imgCH).append(imgDiv);
+
             var infoDiv = $(`<div class="dishInfo col-12 col-sm align-self-center">
-                                <h5>Order ${i + 1}: ${dish.cookingStyle} ${dish.meat} with ${dish.vegetable}</h5>
+                                <h5>Order ${i + 1}:  ${dish.cookingStyle} ${dish.meat} with ${dish.vegetable}</h5>
                                 <br>
                                 <small>
                                     <p>Flavor: ${dish.flavor}</p>
@@ -189,7 +187,7 @@ const showCos = async() => {
 
 
 
-            $(dishdiv).append(imgProduct).append(imgCH).append(imgDiv).append(infoDiv).append(editBtn).append(deleteBtn);
+            $(dishdiv).append(imgProduct).append(imgComb).append(infoDiv).append(editBtn).append(deleteBtn);
 
             deleteBtn.click();
 
@@ -283,12 +281,12 @@ const getImageOfCH = (carbohydrate) => {
     var imgDiv;
     if (carbohydrate == 'Rice') {
         imgDiv = $(`
-                    <div class="col-12 col-sm-2 column">
+                    <div class="col-6 col-sm-12 column">
                         <img class="d-block img-fluid" src="img/rice.png" alt="rice"></img>
                     </div>`);
     } else {
         imgDiv = $(`
-                    <div class="col-12 col-sm-2 column">
+                    <div class="col-6 col-sm-12 column">
                     <img class="d-block img-fluid" src="img/noodles.png" alt="noodles"></img>
                     </div>`);
     }
@@ -299,16 +297,33 @@ const getImageOfDrink = (drink) => {
     var imgDiv;
     if (drink == 'Milk') {
         imgDiv = $(`
-                    <div class="col-12 col-sm-2 column">
+                    <div class="col-6 col-sm-12 column">
                         <img class="d-block img-fluid" src="img/milk.png" alt="milk"></img>
                     </div>`);
     } else {
         imgDiv = $(`
-                    <div class="col-12 col-sm-2 column">
+                    <div class="col-6 col-sm-12 column">
                     <img class="d-block img-fluid" src="img/soda.png" alt="soda"></img>
                     </div>`);
     }
     return imgDiv;
 };
 
+const getImageOfHotpot = (num) => {
+    var imgdiv;
+    if (num < 4) {
+        imgdiv = $(`
+        <div class="col-12 col-sm-3 cosImgDiv">
+            <img class="d-block img-fluid" src="img/1-3.png" alt="1-3">
+        </div>`);
+    } else {
+        imgdiv = $(`
+        <div class="col-12 col-sm-3 cosImgDiv">
+            <img class="d-block img-fluid" src="img/4-6.png" alt="4-6">
+        </div>`);
+    }
+    return imgdiv;
+};
+
+showHotPot();
 showCos();
