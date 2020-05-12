@@ -60,13 +60,13 @@ router.post('/signup', async(req, res) => {
         res.status(401).json({ error: error });
         return;
     }
-    
+
     if (password.length < 8) {
-        const error = "401 : the password length cannot be less than 8!";
+        const error = "401 : The password length cannot be less than 8!";
         res.status(401).json({ error: error });
         return;
     }
-    
+
     if (password !== confirmedPassword) {
         const error = "401 : the password and the confirmed password are not the same!";
         res.status(401).json({ error: error });

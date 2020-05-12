@@ -13,6 +13,9 @@ module.exports = {
         if (!password) throw "You must provide Password";
         if (typeof password !== "string") throw "Password value is not a string";
 
+        if (password.length < 8) {
+            throw "401 : The password length cannot be less than 8!";
+        }
 
         const userCollection = await users();
 

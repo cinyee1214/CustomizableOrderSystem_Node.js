@@ -207,7 +207,7 @@ const getDeleteBtn = (id) => {
 const getImageOfProdcut = (veg, meat) => {
     var imgDiv;
     if (veg == 'Tomato') {
-        if (meat == 'Beaf') {
+        if (meat == 'Beef') {
             imgDiv = $(`
             <div class="col-12 col-sm-2 cosImgDiv">
                 <img class="d-block img-fluid" src="img/tmt_bf.png" alt="tmt_bf"></img>
@@ -224,7 +224,7 @@ const getImageOfProdcut = (veg, meat) => {
             </div>`);
         }
     } else if (veg == 'Potato') {
-        if (meat == 'Beaf') {
+        if (meat == 'Beef') {
             imgDiv = $(`
             <div class="col-12 col-sm-2 cosImgDiv">
                 <img class="d-block img-fluid" src="img/ptt_bf.png" alt="ptt_bf"></img>
@@ -241,7 +241,7 @@ const getImageOfProdcut = (veg, meat) => {
             </div>`);
         }
     } else if (veg == 'Mushroom') {
-        if (meat == 'Beaf') {
+        if (meat == 'Beef') {
             imgDiv = $(`
             <div class="col-12 col-sm-2 cosImgDiv">
                 <img class="d-block img-fluid" src="img/mr_bf.png" alt="mr_bf"></img>
@@ -258,7 +258,7 @@ const getImageOfProdcut = (veg, meat) => {
             </div>`);
         }
     } else {
-        if (meat == 'Beaf') {
+        if (meat == 'Beef') {
             imgDiv = $(`
             <div class="col-12 col-sm-2 cosImgDiv">
                 <img class="d-block img-fluid" src="img/eg_bf.png" alt="eg_bf"></img>

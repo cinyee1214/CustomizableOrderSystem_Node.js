@@ -13,7 +13,8 @@ async function main() {
     await db.dropDatabase();
 
     //feedback
-    const feedback = await feedbacks.addFeedback("John", "Doe", "1", "81288844", "JDoe@gmail.com", "This is amazing!!!!");
+    const feedback1 = await feedbacks.addFeedback("John", "Doe", "1", "81288844", "JDoe@gmail.com", "This is amazing!!!!");
+    const feedback2 = await feedbacks.addFeedback("Chloe", "Smith", "1", "81288844", "Chloe@gmail.com", "I love this menu!!!!");
 
     //user
     const User1 = await users.addUser("John", "Doe", "JDoe@gmail.com", "XX Str, apt 101, Hoboken, NJ", "808-888-8888", "elementarymydearwatson");
@@ -22,7 +23,7 @@ async function main() {
 
     const User3 = await users.addUser("Chloe", "Smith", "Chloe@gmail.com", "XX Str, apt 103, Hoboken, NJ", "202-222-2222", "quidditch");
 
-    const admin = await users.addUser("Admin", "ZZ", "admin@gmail.com", "XX Str, apt 107, Hoboken, NJ", "202-222-2227", "test");
+    const User4 = await users.addUser("Admin", "ZZ", "admin@gmail.com", "XX Str, apt 107, Hoboken, NJ", "202-222-2227", "testtest");
 
 
 
@@ -81,22 +82,33 @@ async function main() {
 
     // Data_dish test
     const dish1 = await dishes.addDish(
-        User2._id,
+        User4._id,
         "Tomato",
-        "pork",
-        "stew",
-        "mild",
-        "rice",
-        "milk",
-        "stewed mild tomato with pork, serving with rice and milk."
+        "Pork",
+        "Stewed",
+        "Mild",
+        "Rice",
+        "Milk",
+        "Stewed Mild Tomato with Pork, serving with Rice and Milk."
+    );
+
+    const dish2 = await dishes.addDish(
+        User4._id,
+        "Mushroom",
+        "Beef",
+        "Fried",
+        "Spicy",
+        "Noodles",
+        "Soda",
+        "Fried Spicy Mushroom with Beef, serving with Noodles and Soda."
     );
 
     // Data_hotpot test
     const hotpot1 = await hotpots.addHotpot(
-        User1._id,
+        User4._id,
         "4",
         "non-smoking",
-        "05/12/2020"
+        "05,12,2020"
     );
 
 

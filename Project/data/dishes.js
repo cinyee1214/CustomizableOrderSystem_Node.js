@@ -17,21 +17,45 @@ module.exports = {
         if (!vegetable) throw "You must provide a vegetable";
         if (vegetable === undefined) throw "vegetable not defined";
         if (typeof vegetable !== "string") throw "vegetable value is not a string";
+        if (vegetable != "Tomato" && vegetable != "Potato" && vegetable != "Mushroom" && vegetable != "Eggplant") {
+            throw "vegetable is not valid";
+        }
+
         if (!meat) throw "You must provide a meat";
         if (meat === undefined) throw "meat not defined";
         if (typeof meat !== "string") throw "meat value is not a string";
+        if (meat != "Beef" && meat != "Pork" && meat != "Chicken") {
+            throw "meat is not valid";
+        }
+
         if (!cookingStyle) throw "You must provide a cookingStyle";
         if (cookingStyle === undefined) throw "cookingStyle not defined";
         if (typeof cookingStyle !== "string") throw "cookingStyle value is not a string";
+        if (cookingStyle != "Stewed" && cookingStyle != "Fried") {
+            throw "cookingStyle is not valid";
+        }
+
         if (!flavor) throw "You must provide a flavor";
         if (flavor === undefined) throw "flavor not defined";
         if (typeof flavor !== "string") throw "flavor value is not a string";
+        if (flavor != "Spicy" && flavor != "Mild") {
+            throw "flavor is not valid";
+        }
+
         if (!carbohydrate) throw "You must provide carbohydrate";
         if (carbohydrate === undefined) throw "carbohydrate not defined";
         if (typeof carbohydrate !== "string") throw "carbohydrate value is not a string";
+        if (carbohydrate != "Rice" && carbohydrate != "Noodles") {
+            throw "carbohydrate is not valid";
+        }
+
         if (!drink) throw "You must provide drink";
         if (drink === undefined) throw "drink not defined";
         if (typeof drink !== "string") throw "drink value is not a string";
+        if (drink != "Soda" && drink != "Milk") {
+            throw "drink is not valid";
+        }
+
         if (!product) throw "You must provide product";
         if (product === undefined) throw "product not defined";
         if (typeof product !== "string") throw "product value is not a string";
