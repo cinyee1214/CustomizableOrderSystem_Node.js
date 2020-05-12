@@ -58,10 +58,19 @@ router.post('/signup', async(req, res) => {
     if (!email || !password || !confirmedPassword) {
         const error = "401: you must provide the email and the password!";
         res.status(401).json({ error: error });
+        return;
     }
+    
+    if (password.length < 8) {
+        const error = "401 : the password length cannot be less than 8!";
+        res.status(401).json({ error: error });
+        return;
+    }
+    
     if (password !== confirmedPassword) {
         const error = "401 : the password and the confirmed password are not the same!";
         res.status(401).json({ error: error });
+        return;
     }
 
     try {
