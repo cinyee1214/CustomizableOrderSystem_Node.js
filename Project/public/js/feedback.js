@@ -10,7 +10,7 @@ $('#feedback-form').submit(async(event) => {
 
     try {
         await $.ajax({
-            url: 'http://localhost:3000/contact/feedback',
+            url: '/contact/feedback',
             type: 'POST',
             data: {
                 firstname: firstname,

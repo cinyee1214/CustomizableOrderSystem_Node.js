@@ -5,7 +5,7 @@ $('#login-form').submit(async(event) => {
 
     try {
         await $.ajax({
-            url: 'http://localhost:3000/login',
+            url: '/login',
             type: 'POST',
             data: {
                 email: email,
@@ -30,7 +30,7 @@ $('#signup-form').submit(async(event) => {
 
     try {
         await $.ajax({
-            url: 'http://localhost:3000/signup',
+            url: '/signup',
             type: 'POST',
             data: {
                 email: email,

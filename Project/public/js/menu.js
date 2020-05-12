@@ -28,7 +28,7 @@ $('#reserve-form').submit(async(event) => {
         $("#reserveModal").modal('hide');
 
         await $.ajax({
-            url: 'http://localhost:3000/menu/hotpot',
+            url: '/menu/hotpot',
             type: 'POST',
             data: {
                 numOfGuest: num,
@@ -79,7 +79,7 @@ $('#orderA').click(async(event) => {
             $("#orderModal").modal('hide');
 
             await $.ajax({
-                url: 'http://localhost:3000/menu/customize',
+                url: '/menu/customize',
                 type: 'POST',
                 data: {
                     vegetable: veg,
@@ -105,7 +105,7 @@ const footer = document.getElementById("feedbackFooter");
 const showFeedback = async() => {
     try {
         const feedbacks = await $.ajax({
-            url: 'http://localhost:3000/menu/feedback',
+            url: '/menu/feedback',
             type: 'GET'
         });
 

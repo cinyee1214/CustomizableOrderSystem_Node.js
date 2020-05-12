@@ -48,7 +48,7 @@ $('#userInfoUpdate').submit(async(event) => {
 
     try {
         await $.ajax({
-            url: 'http://localhost:3000/users',
+            url: '/users',
             type: 'PATCH',
             data: {
                 userId: id,
@@ -72,7 +72,7 @@ $('#userInfoUpdate').submit(async(event) => {
 const showHotPot = async() => {
     try {
         const hotpots = await $.ajax({
-            url: 'http://localhost:3000/users/hotpot',
+            url: '/users/hotpot',
             type: 'GET'
         });
 
@@ -133,7 +133,7 @@ const showHotPot = async() => {
 const showCos = async() => {
     try {
         const dishes = await $.ajax({
-            url: 'http://localhost:3000/users/cos',
+            url: '/users/cos',
             type: 'GET'
         });
 
@@ -336,7 +336,7 @@ const deleteHotpot = async(event) => {
     try {
         const id = event.currentTarget.dataset.id;
         await $.ajax({
-            url: 'http://localhost:3000/users/hotpot/' + id,
+            url: '/users/hotpot/' + id,
             type: 'DELETE'
         });
 
@@ -360,7 +360,7 @@ const deleteCos = async(event) => {
     try {
         const id = event.currentTarget.dataset.id;
         await $.ajax({
-            url: 'http://localhost:3000/users/cos/' + id,
+            url: '/users/cos/' + id,
             type: 'DELETE'
         });
 
@@ -421,7 +421,7 @@ const editHotpot = async(event) => {
 
         try {
             await $.ajax({
-                url: 'http://localhost:3000/users/hotpot/' + id,
+                url: '/users/hotpot/' + id,
                 type: 'PUT',
                 data: {
                     _id: id,
@@ -482,7 +482,7 @@ const editCos = async(event) => {
 
         try {
             await $.ajax({
-                url: 'http://localhost:3000/users/cos/' + id,
+                url: '/users/cos/' + id,
                 type: 'PUT',
                 data: {
                     vegetable: veg,
