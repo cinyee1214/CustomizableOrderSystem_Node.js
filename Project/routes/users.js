@@ -111,12 +111,7 @@ router.patch('/', async(req, res) => {
         res.status(401).json({ error: error });
         return;
     }
-    
-    if (password.length < 8) {
-        const error = "401 : the password length cannot be less than 8!";
-        res.status(401).json({ error: error });
-        return;
-    }
+ 
 
     if (password && cpassword && password !== cpassword) {
         const error = "401 : The new password and the confirmed password are not the same!";
@@ -170,6 +165,12 @@ router.patch('/', async(req, res) => {
 
         if (Object.keys(updatedObject).length === 0) {
             const error = "401 : Please provide your new information to update!";
+            res.status(401).json({ error: error });
+            return;
+        }
+        
+        if (password.length < 8) {
+            const error = "401 : the new password length cannot be less than 8!";
             res.status(401).json({ error: error });
             return;
         }
