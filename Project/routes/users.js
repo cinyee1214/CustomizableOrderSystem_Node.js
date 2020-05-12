@@ -170,7 +170,7 @@ router.patch('/', async(req, res) => {
         }
         
         if (password.length < 8) {
-            const error = "401 : the new password length cannot be less than 8!";
+            const error = "401 : The new password length cannot be less than 8!";
             res.status(401).json({ error: error });
             return;
         }
