@@ -8,23 +8,10 @@ const saltRounds = 5;
 module.exports = {
 
     async addUser(firstName, lastName, Email, Address, Contactnumber, password) {
-        // if (arguments.length < 6) throw "arguments are not enough";
-
-        // if (!lastName) throw "You must provide a last Name";
-
-        // if (typeof lastName !== "string") throw "last Name value is not a string";
-        // if (!Email) throw "You must provide a Email";
-
-        // if (typeof Email !== "string") throw "Email value is not a string";
-        // if (!Address) throw "You must provide Address";
-
-        // if (typeof Address !== "string") throw "Address value is not a string";
-        // if (!Contactnumber) throw "You must provide Contact number";
-
-        // if (typeof Contactnumber !== "string") throw "Contact number value is not a string";
-        // if (!hashedPassword) throw "You must provide hashedPassword";
-
-        // if (typeof hashedPassword !== "string") throw "hashedPassword value is not a string";
+        if (!Email) throw "You must provide a Email";
+        if (typeof Email !== "string") throw "Email value is not a string";
+        if (!password) throw "You must provide Password";
+        if (typeof password !== "string") throw "Password value is not a string";
 
 
         const userCollection = await users();
