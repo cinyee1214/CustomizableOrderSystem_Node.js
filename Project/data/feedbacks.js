@@ -3,6 +3,12 @@ const feedbacks = mongoCollections.feedbacks;
 
 module.exports = {
     async addFeedback(firstname, lastname, areacode, telnum, emailid, feedback) {
+        if (!firstname) throw "You must provide an first name.";
+        if (!lastname) throw "You must provide an last name.";
+        if (!areacode) throw "You must provide an areacode.";
+        if (!telnum) throw "You must provide an tel number.";
+        if (!emailid) throw "You must provide an email id.";
+        if (!feedback) throw "You must provide an user feedback.";
         const feedbackCollection = await feedbacks();
 
         let newFeedback = {
