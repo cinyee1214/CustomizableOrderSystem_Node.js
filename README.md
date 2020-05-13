@@ -1,4 +1,9 @@
-# finalproject
+# CS546 Final Project
+
+# front-end: Bootstrap4, jQuery, CSS, handlebars, JavaScript
+# back-end: express, mongoDB, NodeJS
+
+# Deployed on AWS: http://ec2-18-217-214-70.us-east-2.compute.amazonaws.com:3000/
 
 $ npm install
 
@@ -54,9 +59,6 @@ The hotpots collection will store the hotpot reservation info booked by users.
 The Feedbacks collection will store the user comments for the finished dish they ordered.
 
 
-
-# front-end: Bootstrap4, Jquery, CSS, handlebars, JavaScript, HTML
-# back-end: express, mongoDB, NodeJS
 
 
 
