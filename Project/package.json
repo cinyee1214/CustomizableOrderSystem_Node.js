@@ -19,7 +19,7 @@
         "bootstrap-social": "^5.1.1",
         "cookie-parser": "^1.4.5",
         "express": "^4.17.1",
-        "express-handlebars": "^4.0.4",
+        "express-handlebars": "^5.3.1",
         "express-session": "^1.17.1",
         "font-awesome": "^4.7.0",
         "jquery": "^3.3.1",
